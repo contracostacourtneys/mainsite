@@ -14,13 +14,15 @@ import MobileBot from './components/mobilebot/MobileBot.jsx';
 
 // Import static pages
 import HomePage from './components/pages/home-page';
-import TestHomePage from './components/pages/test-home-page';
+import TestAccordionBox from './components/template/accordion-box/accordion-box-container';
 import ContactPage from './components/pages/contact-page';
 import Forms from './components/pages/forms-page';
 import FAQs from './components/pages/faqs-page';
+import Videos from './components/pages/videos-page';
 import Portal from './components/pages/portal-page';
-import SmallClaims from './components/pages/topics/smallclaims';
-import SmallClaimsParty from './components/pages/topics/smallclaims-party';
+import SmallClaims from './components/pages/topics/smallclaims/smallclaims';
+import SmallClaimsParty from './components/pages/topics/smallclaims/smallclaims-party';
+import SmallClaimsStage from './components/pages/topics/smallclaims/smallclaims-stage';
 import Guardianship from './components/pages/topics/guardianship';
 import Eviction from './components/pages/topics/eviction';
 import Traffic from './components/pages/topics/traffic';
@@ -80,7 +82,7 @@ export default class AppRouter extends Component {
               <div className="Page">
                 <Switch>
                   <Route exact path="/" component={HomePage} />
-                  <Route path="/test" component={TestHomePage} />
+                  <Route path="/test" component={TestAccordionBox} />
                   <Route path="/checklist" component={TodoApp} />
                   <Route path="/contact-us" component={ContactPage} />
                   <Route path="/portal" component={Portal} />
@@ -89,6 +91,7 @@ export default class AppRouter extends Component {
                   <Route path="/login" component={Login} />
                   <Route path="/logout" component={Logout} />
                   <Route path="/faqs" component={FAQs} />
+                  <Route path="/video-resources" component={Videos} />
                   <Route path="/forms" component={Forms} />
                   <Route
                     path="/locations"
@@ -104,6 +107,7 @@ export default class AppRouter extends Component {
                   <Route path="/reset-password/:resetToken" component={ResetPassword} />
 
                   <Route exact path="/smallclaims" component={SmallClaims} />
+                  <Route path="/smallclaims/:party/:stage" component={SmallClaimsStage} />
                   <Route path="/smallclaims/:party" component={SmallClaimsParty} />
                   <Route path="/guardianship" component={Guardianship} />
                   <Route path="/eviction" component={Eviction} />

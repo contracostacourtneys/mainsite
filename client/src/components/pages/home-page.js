@@ -1,18 +1,44 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-
+import { connect } from 'react-redux';
+import { fetchCategories } from '../../actions/content.js';
 import Squarebox from '../template/square-box';
-import Bannerbox from '../template/banner-box';
-import Infobox from '../template/info-box';
+import Asset from '../template/responsive-image';
+import client from '../../services/contentful-client'
 
-import IcnSC from '../../img/smallclaims_1.svg';
-import IcnDV from '../../img/dv_1.svg';
-import IcnGuardianship from '../../img/guardianship_1.svg';
-import IcnTraffic from '../../img/traffic_1.svg';
-import IcnEviction from '../../img/eviction_1.svg'; 
-import IcnFamily from '../../img/family_1.svg';
+/* Testing integration with Contentful CMS */ 
+class HomePage extends React.Component {
+  componentWillMount() {
+    this.props.fetchCategories()
+    console.log(this.props.content, 'this.props.categories')
+  }
+  // constructor() {
+  //   super()
+  //   this.state = {categories: []}
+  // }
 
-export default class HomePage extends Component {
+  // componentDidMount() {
+  //   client.getEntries({content_type: 'category'}).then((response) => {
+  //     this.setState({categories: response.items})
+  //   })
+  // }
+
+  renderCategories() {
+    return this.props.content.map((category, index) => {
+      return (
+        <div key={category.sys.id}>
+          <Link to={category.fields.url}>
+            <Squarebox 
+              id={category.sys.id}
+              boxTitle={category.fields.title}  
+              assetId={category.fields.image.sys.id}
+            />
+          </Link>
+        </div>
+      );
+    });
+  }
+
   render() {
     return (
       <div className="mainpage">
@@ -21,72 +47,62 @@ export default class HomePage extends Component {
           <h1>Self-Help Law Center</h1>
           <hr className="mainpage-title-line"/>
         </div>
-{/*        <Bannerbox 
-          boxTitle='Do I need a lawyer?'
-          boxContent='Learn more about representing yourself in court, and explore frequently asked questions.'
-          buttonText='FAQs'
-          buttonLink='/faqs'
-        />*/}
         <div className="grid grid-pad">
-          <div>
-            <Link to="/guardianship">
-              <Squarebox 
-                  id=""
-                  boxTitle="Guardianship"
-                  imgSrc={IcnGuardianship}
-               /> 
-            </Link> 
-          </div>
-          <div>
-            <Link to="/family">
-              <Squarebox 
-                  id=""
-                  boxTitle="Family Law"
-                  imgSrc={IcnFamily}
-               /> 
-            </Link> 
-          </div>
-          <div>
-            <Link to="/eviction">
-              <Squarebox 
-                  id=""
-                  boxTitle="Eviction"
-                  imgSrc={IcnEviction}
-               /> 
-            </Link> 
-          </div>
-          <div>
-            <Link to="/dv">
-              <Squarebox 
-                  id=""
-                  boxTitle="Domestic Violence"
-                  imgSrc={IcnDV}
-               /> 
-            </Link> 
-          </div>
-          <div>
-            <Link to="/smallclaims">
-              <Squarebox 
-                  id=""
-                  boxTitle="Small Claims"
-                  imgSrc={IcnSC}
-               /> 
-            </Link> 
-          </div>
-          <div>
-            <Link to="/traffic">
-              <Squarebox 
-                  id=""
-                  boxTitle="Traffic"
-                  imgSrc={IcnTraffic}
-               /> 
-            </Link> 
-          </div>
-
+          {this.renderCategories()}
         </div>
       </div>
-
-    ) 
+    );
   }
 }
 
+function mapStateToProps(state) {
+  return { content: state.content.all };
+}
+
+// export default connect(mapStateToProps)(HomePage);
+
+export default connect(mapStateToProps, { fetchCategories })(HomePage);
+
+/*
+renderCategories() {
+    return this.props.content.map((category, index) => {
+      return (
+        <div key={category.sys.id}>
+          <Link to={category.fields.url}>
+            <Squarebox 
+              id={category.sys.id}
+              boxTitle={category.fields.title}  
+              assetId={category.fields.image.sys.id}
+            />
+
+          </Link>
+
+            
+        </div>
+      );
+    });
+  }
+
+  render() {
+    return (
+      <div className="mainpage">
+        <div className="mainpage-title">
+          <hr className="mainpage-title-line" />
+          <h1>Self-Help Law Center</h1>
+          <hr className="mainpage-title-line"/>
+        </div>
+        <div className="grid grid-pad">
+          {this.renderCategories()}
+        </div>
+      </div>
+    );
+  }
+}
+
+function mapStateToProps(state) {
+  return { content: state.content.all };
+}
+
+export default connect(mapStateToProps, { fetchCategories })(TestHomePage);
+
+*/
