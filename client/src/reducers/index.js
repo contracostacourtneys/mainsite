@@ -2,7 +2,8 @@ import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import authReducer from './auth_reducer';
 import userReducer from './user_reducer';
-import siteDataReducer from './site_data_reducer';
+import contentReducer from './content_reducer';
+import assetsReducer from './assets_reducer';
 import chatlog from './chatlog';
 import chatUserInput from './chatUserInput';
 import botStatusReducer from './botStatusReducer';
@@ -16,6 +17,7 @@ import {
 import todos from './todos'
 import loading from './loading'
 import visibilityFilter from './visibilityFilter'
+
 
 // import { routerStateReducer }      from 'redux-router';
 // import { themeReducer }            from 'redux-theme';
@@ -36,7 +38,8 @@ const rootReducer = combineReducers({
   auth: authReducer,
   user: userReducer,
   chat: chatReducer,
-  data: siteDataReducer,
+  content: contentReducer,
+  assets: assetsReducer,
   checklist: checklistReducer,
   selectedChecklist,
   tasksByChecklistType,

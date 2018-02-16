@@ -99,11 +99,11 @@ class ChatBubble extends React.Component {
     return (
       <div className={className} /* onClick={this.props.onClick}*/>
         {ReactHtmlParser(this.props.message)}
-        <p className="feedback">
-        Is this response helpful?
-        <input type="submit" value="Yes" />
-        <input type="submit" value="No" />
-        </p>
+        {/*<p className="feedback">*/}
+        {/*Is this response helpful?*/}
+        {/*<input type="submit" value="Yes" />*/}
+        {/*<input type="submit" value="No" />*/}
+        {/*</p>*/}
       </div>
     );
   }

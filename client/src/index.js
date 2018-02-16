@@ -7,7 +7,7 @@ import cookie from 'react-cookie';
 import AppRouter from './router';
 import rootReducer from './reducers/index';
 import dataService from './services/data-service'
-
+import promise from 'redux-promise'
 //import todoApp from './reducers' //rootReducer
 //import App from './components/App' //appRouter
 
@@ -28,7 +28,7 @@ import './public/stylesheets/app.scss';
 // }
 
 const devTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
-const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
+const createStoreWithMiddleware = applyMiddleware(reduxThunk, promise)(createStore);
 const store = createStoreWithMiddleware(rootReducer, devTools);
 
 store.subscribe(() => {

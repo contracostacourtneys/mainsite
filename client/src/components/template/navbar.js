@@ -71,6 +71,13 @@ function Navbar(props) {
           <NavLink
             activeClassName='Menu-link--active'
             className='Menu-link'
+            to='/video-resources'
+          >
+            Video Resources
+          </NavLink>
+          <NavLink
+            activeClassName='Menu-link--active'
+            className='Menu-link'
             to='/locations'
           >
             Find a Courthouse
