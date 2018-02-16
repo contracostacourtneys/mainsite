@@ -23,6 +23,12 @@ const formData = [
 		category: "Small Claims",
 		dateRevised: "Jan. 1, 2017",
 		description: "Other Plaintiffs or Defendants (Small Claims)" 
+	},
+	{
+		formName: "E-Test", 
+		category: "Eviction",
+		dateRevised: "Jan. 1, 2017",
+		description: "Eviction test" 
 	}
 ]
 
@@ -90,7 +96,7 @@ export default class FormsHome extends React.Component {
                 },
                 {
                   Header: "Date Revised",
-                  accessor: "dateRevised"
+                  accessor: "dateRevised" //how to disable input box? 
                 }
               ]
             },

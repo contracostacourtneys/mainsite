@@ -9,7 +9,7 @@ export default class Infobox extends Component {
 				<div>{this.props.boxContent}</div>
 				<a className={this.props.buttonVisibilityClass} href={this.props.buttonLink}><button className="Info-box-btn">{this.props.buttonText}</button></a>
 			</div>
-			)
+		) 
 	}
 } 
 

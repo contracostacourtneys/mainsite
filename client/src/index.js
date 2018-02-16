@@ -6,10 +6,8 @@ import reduxThunk from 'redux-thunk';
 import cookie from 'react-cookie';
 import AppRouter from './router';
 import rootReducer from './reducers/index';
-import dataService from './services/data-service';
-// import 'babel-polyfill';
-// import 'matchmedia-polyfill';
-
+import dataService from './services/data-service'
+import promise from 'redux-promise'
 //import todoApp from './reducers' //rootReducer
 //import App from './components/App' //appRouter
 
@@ -36,13 +34,16 @@ delete window.__PRELOADED_STATE__;
 console.log("preloadedState: ", preloadedState);
 
 const devTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
-const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
-const store = createStoreWithMiddleware(rootReducer, preloadedState, devTools);
+// <<<<<<< HEAD
+// const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
+// const store = createStoreWithMiddleware(rootReducer, preloadedState, devTools);
 // const store = createStore(
 // 	rootReducer,
 // 	preloadedState,
 // 	applyMiddleware(reduxThunk, devTools)
 // 	);
+const createStoreWithMiddleware = applyMiddleware(reduxThunk, promise)(createStore);
+const store = createStoreWithMiddleware(rootReducer, devTools);
 
 store.subscribe(() => {
   console.log('state changed', store.getState());
