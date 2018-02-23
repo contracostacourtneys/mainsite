@@ -14,6 +14,14 @@ $red: #C62C2C;
 $blue-azure: #00A7E4;
 
 // Login Page
+.Login,
+.Register {
+  input {
+    margin-bottom: 1.5rem;
+    width: 50%;
+  }
+}
+
 .form-group {
 }
 

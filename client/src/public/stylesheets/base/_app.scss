@@ -17,9 +17,21 @@ $white-background: #ffffff;
 $box-height: 225px;
 $box-img-height: 160px;
 $box-img-width: 180px;
+$footer-push-height: 20rem; // Footer and Page-footer-push must be same height;
+$footer-push-height-negative: -20rem;
+
+
+$bot-blue: #94ebff; //updated 2/21/18
+$very-light-blue: #e3f8ff;
+$light-grey: #f0f0f0;
+$bot-blue-icon: #4AA7DB;
+$bot-link: #0000ff;
+$bot-blue-icon-pressed: #5392be;
+
 
 html {
   font-size: 10px;
+  height: 100%;
 
   @include lg {
     font-size: 12px;
@@ -36,6 +48,8 @@ body {
 }
 
 .App {
+  min-height: 100vh;
+
   font-size: 1.5rem;
   padding: 2rem;
 
@@ -43,8 +57,11 @@ body {
     padding: 3rem;
   }
 
-  @include md {
-    padding: 4rem;
+  // @include lg {
+  //   padding: 4rem;
+  // }
+  .App-footer-push {
+    height: $footer-push-height;
   }
 }
 
@@ -94,12 +111,19 @@ button:hover {
   background: $blue-button-pressed;
 }
 
+hr {
+  border: 0;
+  border-top: 1px solid $dark-grey;
+  margin: 1rem 0;
+}
+
 .hidden {
   display: none;
 }
 // ==========================
 // ==== nav and searchbar ===
 // ==========================
+// this masks the top of the screen with a white bar
 .App-mask {
   display: none;
   position: relative;
@@ -115,90 +139,23 @@ button:hover {
   }
 }
 
-.Menu {
-  align-items: center;
-  display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-  margin-top: 2rem;
-  padding-bottom: 2rem;
-  z-index: 1000;
-
-  @include lg {
-    position: fixed;
-    height: 100vh;
-    padding-bottom: 0;
-    display: inline-block;
-    width: 18rem;
-  }
-}
-
-.Menu-logo {
-  margin-right: 2rem;
-  width: 6rem;
-  // background-image: url('../../../../img/ccsc-logo-sm.svg');
-  .Menu-logo-img {
-    display: none;
-    // background-image: url('../../../img/ccsc-logo.svg');
-  }
-
-  @include lg {
-    left: 0;
-    padding: 4rem 0 4rem 4rem;
-    position: fixed;
-    top: 0;
-    width: 19rem;
-
-    .Menu-logo-img-sm {
-      display: none;
-    }
-    .Menu-logo-img {
-      display: block;
-    }
-  }
-}
-
-.Menu-links {
-  @include md {
-  }
-
-  @include lg {
-    position: fixed; //mine
-    padding: 6rem 0 4rem 0; //mine
-  }
-}
-
-.Menu-link {
-  font-family: $font-family-sans-serif;
-  line-height: 3rem;
-  margin-left: 1.5rem;
-  text-decoration: none;
-
-  @include md {
-    margin-left: 3rem;
-  }
-
-  @include lg {
-    display: block;
-    margin-left: 0;
-  }
-}
-
-.Menu-link--active {
-  color: $black;
-}
-
 .Search {
   align-items: center;
   background-color: $white;
   display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+  width: 75%;
+  @include md {
+    margin-left: 1rem; 
+    width: 100%;
+  }
   @include lg {
     margin-left: 20rem;
     position: fixed;
   }
-  width: 100%;
+  margin-top: 1rem;
+  margin-left: 2rem;
   z-index: 1000;
 }
 
@@ -215,6 +172,208 @@ button:hover {
 
   @include lg {
     margin: 8rem 0 0 20rem;
+  }
+}
+
+// ==============
+// ==== Menu ====
+// ==============
+.Menu {
+  // align-items: center;
+  // display: -webkit-box;
+  //   display: -ms-flexbox;
+  //   display: flex;
+  z-index: 1000;
+  margin-top: -3rem;
+  margin-left: 2rem;
+  padding-bottom: 2rem;
+
+  @include md {
+    margin-top: -4rem;
+
+  }
+  @include lg {
+    position: fixed;
+    height: 100vh;
+    padding-bottom: 0;
+    // display: inline-block;
+    width: 18rem;
+    margin-top: 2rem;
+  }
+}
+
+.Menu-logo {
+  position: relative;
+  top: 3rem;
+  left: 3rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  width: 13rem;
+  .Menu-logo-img {
+    display: none;
+  }
+
+  @include md {
+    margin-left: 1.5rem;
+  }
+
+  @include lg {
+    margin-left: 0;
+    left: 0;
+    padding: 3.25rem 0 4rem 4rem;
+    position: fixed;
+    top: 0;
+    width: 19rem;
+
+    .Menu-logo-img-sm {
+      display: none;
+    }
+    .Menu-logo-img {
+      display: block;
+    }
+  }
+}
+
+.Menu-links {
+  display:none;
+  @include lg {
+    display: block;
+    position: fixed; //mine
+    padding: 8rem 0 4rem 0; //mine
+  }
+}
+
+.Menu-link {
+  font-family: $font-family-sans-serif;
+  line-height: 3rem;
+  margin-left: 1.5rem;
+  text-decoration: none;
+
+  // @include md {
+  //   margin-left: 3rem;
+  // }
+
+  @include lg {
+    display: block;
+    margin-left: 0;
+  }
+}
+
+.Menu-link--active {
+  color: $black;
+}
+
+// =========================
+// hamburger menu for mobile
+// =========================
+.Menu-burger {
+  @include lg {
+    display: none;
+  }
+  display: block;
+  position: absolute;
+  top: 3rem;
+  left: 4rem;
+  
+  z-index: 100;
+  
+  -webkit-user-select: none;
+  user-select: none;
+  .Menu-burger-checkbox {
+      display: block;
+      width: 40px;
+      height: 32px;
+      position: absolute;
+      top: -7px;
+      left: -5px;
+      
+      cursor: pointer;
+      
+      opacity: 0; /* hide this */
+      border: none;
+      z-index: 2; /* and place it over the hamburger */
+      
+      -webkit-touch-callout: none;
+  }
+  .Menu-burger-checkbox:checked ~ span {
+      opacity: 1;
+      transform: rotate(45deg) translate(-2px, -1px);
+      background: $white;
+  }
+  .Menu-burger-checkbox:checked ~ span:nth-last-child(3) {
+      opacity: 0;
+      transform: rotate(0deg) scale(0.2, 0.2);
+  }
+   .Menu-burger-checkbox:checked ~ span:nth-last-child(2) {
+      transform: rotate(-45deg) translate(0, -1px);
+  }
+
+  span {
+    display: block;
+    width: 33px;
+    height: 4px;
+    margin-bottom: 5px;
+    position: relative;
+    
+    background: $dark-grey;
+    border-radius: 3px;
+    
+    z-index: 1;
+    
+    transform-origin: 4px 0px;
+    
+    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+                background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+                opacity 0.55s ease;
+    }
+  span:first-child {
+    transform-origin: 0% 0%;
+  }
+  span:nth-last-child(2) {
+    transform-origin: 0% 100%;
+  }
+
+
+  // display: block;
+  // position: relative;
+  
+}
+
+.Menu-links-burger {
+  display: block;
+  position: absolute;
+  width: 350px;
+  height: 100vh;
+  margin: -100px 0 0 -50px;
+  padding: 12rem 0 5rem 5rem;
+  // padding-top: 125px;
+  
+  background: $dark-grey;
+  list-style-type: none;
+  -webkit-font-smoothing: antialiased;
+  /* to stop flickering of text in safari */
+  
+  transform-origin: 0% 0%;
+  transform: translate(-100%, 0);
+  
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+  a {
+    color: $white;
+  }
+  a:hover {
+    color: $blue-button;
+  }
+}
+
+.Menu-link-burger {
+  display: block;
+  padding: 10px 0;
+  font-size: 22px;
+}
+
+.Menu-burger {
+  input:checked ~ .Menu-links-burger {
+    transform: none;
   }
 }
 
@@ -454,11 +613,12 @@ button:hover {
   left: 0;
   background-color: $dark-grey;
   width: 100%;
+  height: $footer-push-height;
   display: -webkit-box;
     display: -ms-flexbox;
     display: flex; // somehow display:flex removes p margin whitespace at bottom
   color: $white;
-  margin-top: 5rem;
+  // margin-top: 5rem;
   a {
     color: $white;
     text-decoration: none;
@@ -475,33 +635,28 @@ button:hover {
 // ==========================
 // ==== default stylings ====
 // ==========================
-hr {
-  border: 0;
-  border-top: 1px solid $black;
-  margin: 1rem 0;
-}
 
-.Example {
-  background: #f6f8fa;
-  border-radius: 0.4rem;
-  padding: 2rem;
-}
+// .Example {
+//   background: #f6f8fa;
+//   border-radius: 0.4rem;
+//   padding: 2rem;
+// }
 
-.Example .Icon {
-  margin-right: 10px;
-}
+// .Example .Icon {
+//   margin-right: 10px;
+// }
 
-.BackgroundImgExample {
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 16rem;
-  max-width: 25rem;
-}
+// .BackgroundImgExample {
+//   background-position: center center;
+//   background-repeat: no-repeat;
+//   background-size: cover;
+//   height: 16rem;
+//   max-width: 25rem;
+// }
 
-.ImgExample {
-  max-width: 25rem;
-}
+// .ImgExample {
+//   max-width: 25rem;
+// }
 
 // ==========================
 // ====== GRID ==============
@@ -525,12 +680,13 @@ hr {
   // background: white;
   // margin: 0 0 20px 0;
 }
-.grid:after {
+
+// .grid:after {
   /* Or @extend clearfix */
   // content: "";
   // display: table;
   // clear: both;
-}
+// }
 
 // [class*='col-'] {
 //   float: left;
@@ -560,22 +716,16 @@ hr {
 //   width: 12.5%;
 // }
 
-.module {
-  // padding: 2rem;
-}
+// .module {
+//   padding: 2rem;
+// }
 
-.grid-pad {
-  // padding: 20px 0 20px 20px;
-}
-.grid-pad [class*='col-']:last-of-type {
-  // padding-right: 20px;
-}
+// .grid-pad {
+//   padding: 20px 0 20px 20px;
+// }
+// .grid-pad [class*='col-']:last-of-type {
+//   padding-right: 20px;
+// }
 
 /////////////
-.Login,
-.Register {
-  input {
-    margin-bottom: 1.5rem;
-    width: 50%;
-  }
-}
+

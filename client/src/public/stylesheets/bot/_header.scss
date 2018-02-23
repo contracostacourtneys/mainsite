@@ -15,21 +15,25 @@
 }
 
 .open-bot-icon-circle {
-  width: 56px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  width: 130px;
   height: 56px;
-  border-radius: 50%;
-  -moz-border-radius: 50%;
-  -webkit-border-radius: 50%;
+  border-radius: 30px;
+  -moz-border-radius: 30px;
+  -webkit-border-radius: 30px;
   
-  background-color: $bot-blue;
+  background-color: $bot-blue-icon;
   cursor: pointer;
-  text-align: center;  
+  // text-align: center;  
 
   position: fixed;
 
   @include xxs {
     right: 2rem;
-    top: 2rem;
+    bottom: 2rem;
   }
   @include mobile {
     display: none;
@@ -37,15 +41,20 @@
 }
 
 .open-bot-icon-circle:hover {
-  background-color: $bot-blue-pressed;
+  background-color: $bot-blue-icon-pressed;
   .open-bot-icon {
     color: $light-grey;
   }
 }
 
+.open-bot-icon-text {
+  color: white;
+  font-size: 2rem;
+  // margin: 8px 0 0 8px;
+}
 
 .open-bot-icon, .open-bot-icon-m {
-  margin-top: 12px;
+  margin-top: 5px;
   color: #ffffff;
 
   //***
@@ -61,26 +70,30 @@
 
 
 /* icon displays for mobile views <600 and links to mbot route */
-.open-bot-icon-m-circle {
+.open-bot-icon-m-circle { 
+  text-align: center;
+  padding-top: 6px;
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  -moz-border-radius: 50%;
-  -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
   text-align: center;  
   position: fixed;
   cursor: pointer;
-  color: red;
-  // display: -webkit-box;
-  // display: -ms-flexbox;
+  background-color: $bot-blue-icon;
+  right: 2rem;
+  top: 2rem;
+  
   // display: flex;
   // -webkit-box-pack: end;
   // -ms-flex-pack: end;
   // justify-content: flex-end;
-  @include xxs {
-    right: 2rem;
-    top: 2rem
-  }
+
+  // @include xxs {
+  //   right: 20px;
+  //   top: 20px;
+  // }
 }
 
 /* bot header */
@@ -201,7 +214,7 @@ button.refresh-bot:active {
     position: fixed;
     right: 4rem;
     // top: 2.9em;
-    top: 4rem;
+    top: 3.5rem;
   }
 }
 

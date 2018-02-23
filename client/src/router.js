@@ -134,7 +134,8 @@ export default class AppRouter extends Component {
                 </Switch>
               </div>
             </div>
-            
+            <div class="App-footer-push"></div>
+
           </Switch>
           <Footer />
         </div>
