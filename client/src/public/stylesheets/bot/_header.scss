@@ -15,21 +15,26 @@
 }
 
 .open-bot-icon-circle {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  -moz-border-radius: 50%;
-  -webkit-border-radius: 50%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  width: 100px;
+  height: 54px;
+  border-radius: 30px;
+  -moz-border-radius: 30px;
+  -webkit-border-radius: 30px;
   
-  background-color: $bot-blue;
+  background-color: $blue-button;
   cursor: pointer;
-  text-align: center;  
+  // text-align: center;  
 
   position: fixed;
+  z-index: 1010;
 
   @include xxs {
     right: 2rem;
-    top: 2rem;
+    bottom: 2rem;
   }
   @include mobile {
     display: none;
@@ -37,15 +42,22 @@
 }
 
 .open-bot-icon-circle:hover {
-  background-color: $bot-blue-pressed;
+  background-color: $black;
   .open-bot-icon {
     color: $light-grey;
   }
 }
 
+.open-bot-icon-text {
+  color: white;
+  @include sm {
+    font-size: 1.8rem;
+  }
+  // margin: 8px 0 0 8px;
+}
 
 .open-bot-icon, .open-bot-icon-m {
-  margin-top: 12px;
+  margin-top: 5px;
   color: #ffffff;
 
   //***
@@ -61,26 +73,30 @@
 
 
 /* icon displays for mobile views <600 and links to mbot route */
-.open-bot-icon-m-circle {
+.open-bot-icon-m-circle { 
+  text-align: center;
+  padding-top: 6px;
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  -moz-border-radius: 50%;
-  -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
   text-align: center;  
   position: fixed;
   cursor: pointer;
-  color: red;
-  // display: -webkit-box;
-  // display: -ms-flexbox;
+  background-color: $blue-button;
+  right: 2rem;
+  top: 2rem;
+  
   // display: flex;
   // -webkit-box-pack: end;
   // -ms-flex-pack: end;
   // justify-content: flex-end;
-  @include xxs {
-    right: 2rem;
-    top: 2rem
-  }
+
+  // @include xxs {
+  //   right: 20px;
+  //   top: 20px;
+  // }
 }
 
 /* bot header */
@@ -199,9 +215,8 @@ button.refresh-bot:active {
 @media (max-width: 2000px) and (min-width: 600px) {
   .open-bot-icon-circle {
     position: fixed;
-    right: 4rem;
-    // top: 2.9em;
-    top: 4rem;
+    right: 1.75rem;
+    top: 3.5rem;
   }
 }
 

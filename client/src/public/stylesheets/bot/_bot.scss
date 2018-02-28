@@ -5,11 +5,14 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  z-index: 1003;
+  // z-index: 1003;
   font-family: $bot-font;
   -webkit-font-smoothing: antialiased;
 }
 
+.bot-z-index {
+  z-index: 1003;
+}
 // .bot-is-open {
 //   z-index: 1003;
 // }

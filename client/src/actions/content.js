@@ -53,8 +53,8 @@ export function fetchStages() {
   };
 }
 
-export function fetchContent() {
-  const request = axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=stageContent`);
+export function fetchContent(label) {
+  const request = axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=stageContent&fields.label=${label}`);
   console.log('fetch stageContent action')
   return {
     type: FETCH_CONTENT,

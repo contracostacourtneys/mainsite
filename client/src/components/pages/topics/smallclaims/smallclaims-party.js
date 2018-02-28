@@ -50,7 +50,7 @@ class SmallClaimsParty extends Component {
   }
 
 	onStageSelect(title, id, e) {
-		console.log(id)
+		console.log(title)
 		e.stopPropagation();
 		this.setState({
 			buttonSelected: true,
@@ -59,52 +59,24 @@ class SmallClaimsParty extends Component {
 		})
 	}
 
-	renderLinks() {
-		//if button hasn't been clicked, show three button options
-    if (!this.state.buttonSelected) {
-      console.log("false", this.state)
-      const renderedButtons = this.props.content.map((stage, index) => {
-      	return (
-      	<div  className="Square-box-container" onClick={(e) => this.onStageSelect(stage.fields.title, stage.sys.id, e)} key={stage.sys.id}>
+  renderStageButtons() {
+    const renderedButtons = this.props.content.map((stage, index) => {
+      return (
+      <div  className="Square-box-container" onClick={(e) => this.onStageSelect(stage.fields.title, stage.sys.id, e)} key={stage.sys.id}>
+        <Link to={`${this.props.match.url}/${stage.fields.url}`}>
           <SquareBox
-      			id={stage.sys.id}
+            id={stage.sys.id}
             boxTitle={stage.fields.title}
-      			assetId={stage.fields.image.sys.id}
-      		/>
-      	</div> 
-      	)
-  		})
+            assetId={stage.fields.image.sys.id}
+          />
+        </Link>
+      </div> 
+      )
+    })
 
-      return [
-      	<div className="grid grid-pad">{renderedButtons}</div> 
-      ];
-    } else {
-    	console.log("true", this.state)
-    	const renderedLinks = this.props.content.map((stage, index) => {
-    		// if (button.id == this.state.stage) {
-    		// }
-      	return (
-        	<div onClick={(e) => this.onStageSelect(stage.fields.title, stage.sys.id, e)} key={stage.sys.id}>
-        		<a>{stage.fields.title}</a>
-        	</div>
-      	)
-  		})
-      return [
-        // show selected stage content and menu with stage highlighted 
-        // put this in a separate component, and pass state as props
-        <div className="grid-pad">
-{/*        	<div>{this.state.stageTitle} accordion box here</div>
-*/}      		
-          <AccordionBoxContainer />
-          <InfoBox 
-      			boxTitle={`Menu - ${this.state.stageTitle}`}
-      			boxContent={renderedLinks}
-      			buttonVisibilityClass="hidden"
-      			infoboxClass="Box Info-box small-box col-2"
-      		/>
-        </div>
-      ];
-    }
+    return [
+      <div className="grid grid-pad">{renderedButtons}</div> 
+    ];
   }
 
 	render() {
@@ -141,7 +113,7 @@ class SmallClaimsParty extends Component {
         		/>
 
 
-        	{this.renderLinks()}
+        	{this.renderStageButtons()}
         
         </div>
 	    </div>
@@ -155,6 +127,4 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, { fetchStages })(SmallClaimsParty);
-
-
 

@@ -1,7 +1,8 @@
 //styling chat container and chatbox
 
 .chat-box-bg {
-  background-color: $not-white;
+  background-color: $grey-background; //$not-white
+  height: 100vh;
   color: $not-black;
 }
 
@@ -12,11 +13,11 @@
   bottom: 75px;
   padding-top: 73px;
   vertical-align: bottom;
-  border-left: 1px solid #939393;
+  border-left: 1px solid $grey-drop-shadow;
   //adding the overflows fixes header and chatbar in fixed position
   overflow-y: auto;
   overflow-x: hidden;
-  background-color: $not-white;
+  background-color: white; //$not-white
 }
 
 .chatbox-alignment {
@@ -36,6 +37,7 @@
   width: 25em;
   height: auto;
   margin-bottom: 75px;
+  padding-bottom: 100%;
   @include xxs {
     width: 22em;
     padding-left: 1.5em;

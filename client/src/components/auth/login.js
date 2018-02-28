@@ -4,6 +4,7 @@ import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { loginUser, oidcLoginUser } from '../../actions/auth';
 import SquareBox from '../template/square-box';
+import TitleLine from '../template/title-line';
 
 const form = reduxForm({
   form: 'login',
@@ -30,7 +31,7 @@ class Login extends Component {
 
     return (
       <div className="Login">
-        <h1>Login</h1>
+        <TitleLine title="Small Claims" />
         <div className="Login-options-wrapper">
           <div className="Login-option">
             {/*<!-- test openID login -->*/}

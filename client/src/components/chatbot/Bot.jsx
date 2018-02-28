@@ -9,21 +9,24 @@ class Bot extends Component {
 	constructor(props) {
 		super(props);
 	}
+
+
 	render() {
     return (
-      <div className={"position-bot the-bot "}>
-        <OpenBot ref={el => (this.chatWindow = el)} />
+      <div className={ this.props.visible ? "position-bot the-bot bot-z-index": "position-bot the-bot "}>
+        <OpenBot ref={el => (this.chatWindow = el)}/>
       </div>
     );
   }
 }
 
-// const mapStateToProps = state => ({
-//   visible: state.chat.botVisibility,
-// });
 
-export default Bot;
-// export default connect(mapStateToProps)(Bot);
+const mapStateToProps = state => ({
+  visible: state.chat.botVisibility,
+});
+
+// export default Bot;
+export default connect(mapStateToProps)(Bot);
 
 /* 
 

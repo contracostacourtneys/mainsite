@@ -9,8 +9,10 @@ import TitleLine from '../template/title-line';
 /* Testing integration with Contentful CMS */ 
 class HomePage extends React.Component {
   componentWillMount() {
-    this.props.fetchCategories()
-    console.log(this.props.content, 'this.props.categories')
+    if (!this.props.assets) {
+      this.props.fetchCategories()
+      console.log(this.props.categories, 'this.props.categories')
+    }
   }
   // constructor() {
   //   super()
@@ -24,7 +26,7 @@ class HomePage extends React.Component {
   // }
 
   renderCategories() {
-    return this.props.content.map((unit, index) => {
+    return this.props.categories.map((unit, index) => {
       return (
         <div className="Square-box-container" key={unit.sys.id}>
           <Link to={unit.fields.url}>
@@ -52,7 +54,9 @@ class HomePage extends React.Component {
 }
 
 function mapStateToProps(state) {
-  return { content: state.content.categories };
+  return { categories: state.content.categories,
+           assets: state.content.assets
+   };
 }
 
 // export default connect(mapStateToProps)(HomePage);

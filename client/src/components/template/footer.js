@@ -9,7 +9,7 @@ export default class Footer extends Component {
 					<h3>About</h3>
 					<p>Legal information for all of California.</p>
 					<p>A project of Contra Costa Superior Court</p>
-					<p>&copy;2017 Superior Court of California, Contra Costa County</p>
+					<p>&copy;2018 Superior Court of California, Contra Costa County</p>
 				</div>
 				<div className='Footer-div Footer-right'>
 					<h3>Contact</h3>

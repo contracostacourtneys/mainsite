@@ -21,8 +21,8 @@ import FAQs from './components/pages/faqs-page';
 import Videos from './components/pages/videos-page';
 import Portal from './components/pages/portal-page';
 import AzurePortal from './components/pages/azure-portal';
-// import SmallClaims from './components/pages/topics/smallclaims';
-// import SmallClaimsParty from './components/pages/topics/smallclaims-party';
+import FindCourthouse from './components/pages/find-courthouse';
+
 import SmallClaims from './components/pages/topics/smallclaims/smallclaims';
 import SmallClaimsParty from './components/pages/topics/smallclaims/smallclaims-party';
 import SmallClaimsStage from './components/pages/topics/smallclaims/smallclaims-stage';
@@ -99,11 +99,12 @@ export default class AppRouter extends Component {
                   <Route path="/faqs" component={FAQs} />
                   <Route path="/video-resources" component={Videos} />
                   <Route path="/forms" component={Forms} />
-                  <Route
+ {/*                 <Route
                     path="/locations"
                     component={() =>
                       (window.location = 'http://www.cc-courts.org/locations/locations.aspx')}
-                  />
+                  />*/}
+                  <Route path="/court-locations" component={FindCourthouse} />
                   <Route
                     path="/find-a-case"
                     component={() =>
@@ -113,9 +114,8 @@ export default class AppRouter extends Component {
                   <Route path="/reset-password/:resetToken" component={ResetPassword} />
 
                   <Route exact path="/smallclaims" component={SmallClaims} />
-                  <Route path="/smallclaims/:party/" component={SmallClaimsParty} >
-                    <Route path="/:stage" component={SmallClaimsStage} />
-                  </Route>
+                  <Route exact path="/smallclaims/:party" component={SmallClaimsParty} />
+                  <Route path="/smallclaims/:party/:stage" component={SmallClaimsStage} />
                   <Route path="/guardianship" component={Guardianship} />
                   <Route path="/eviction" component={Eviction} />
                   <Route path="/dv" component={Dv} />
@@ -130,11 +130,12 @@ export default class AppRouter extends Component {
 
 
 
-                  <Route path="*" component={NotFoundPage} />
+                  <Route component={NotFoundPage} />
                 </Switch>
               </div>
             </div>
-            
+            <div class="App-footer-push"></div>
+
           </Switch>
           <Footer />
         </div>
@@ -144,6 +145,13 @@ export default class AppRouter extends Component {
 }
 
 /*
+
+<Route exact path="/smallclaims/:party/" component={SmallClaimsParty} >
+                    <Route path="smallclaims/:party/:stage" render={(props) => (
+                      <SmallClaimsStage {...props} />
+                    )}/>
+
+                </Route>
 <BrowserRouter>
 				<Route path="/" component={App}>
 				    <Route path="/contact-us" component={ContactPage} />

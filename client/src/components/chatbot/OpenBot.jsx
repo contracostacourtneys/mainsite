@@ -16,7 +16,9 @@ const SpeechBubble = props =>
   <div>
     <div className="open-bot-icon-circle">
 {/*      <img src={props.imgSrc} alt="open chatbot icon"/>
-*/}      <div className="open-bot-icon"><i className="material-icons md-36">chat_bubble</i></div>
+*/}      
+      <div className="open-bot-icon-text">Chat</div>
+      <div className="open-bot-icon"><i className="material-icons md-36">chat_bubble</i></div>
     </div>
     {/* dont delete. might need if we decide to add to text menu
       <div className="text-bot-icon">
@@ -27,7 +29,8 @@ const SpeechBubble = props =>
 const MobileSpeechBubble = props =>
   <div className="open-bot-icon-m-circle">
 {/*    <img src={ChatbotIcon} alt="open chatbot icon"/>
-*/}    <div className="open-bot-icon-m"><i className="material-icons md-36">chat_bubble</i></div>
+*/}    
+    <div className="open-bot-icon-m"><i className="material-icons md-36">chat_bubble</i></div>
   </div>;
 
 class OpenBot extends React.Component {

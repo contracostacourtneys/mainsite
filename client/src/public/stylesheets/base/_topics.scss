@@ -18,30 +18,35 @@ h1 {
 }
 
 h1.title-line-background {
+  position: relative;
+  overflow: hidden;
+  
+  span {
+    display: inline-block;
+    vertical-align: baseline;
+    zoom: 1;
+    *display: inline;
+    *vertical-align: auto;
     position: relative;
-    overflow: hidden;
-    
-    span {
-        display: inline-block;
-        vertical-align: baseline;
-        zoom: 1;
-        *display: inline;
-        *vertical-align: auto;
-        position: relative;
-        padding: 0 20px;
+    padding: 0 20px;
 
-        &:before, &:after {
-            content: '';
-            display: block;
-            width: 1000px;
-            position: absolute;
-            top: 0.73em;
-            border-top: 6px solid $dark-grey;
-        }
-
-        &:before { right: 100%; }
-        &:after { left: 100%; }
+    &:before, &:after {
+      content: '';
+      display: block;
+      width: 1000px;
+      position: absolute;
+      top: 0.73em;
+      border-top: 6px solid $dark-grey;
     }
+
+    &:before { right: 100%; }
+    &:after { left: 100%; }
+  }
+}
+
+.Accordion-box-item {
+  cursor: pointer;
+  width: 100%;
 }
 
 // .mainpage-title {
