@@ -11,8 +11,8 @@ pipeline {
 	stages {
 		stage('Build') { 
             steps {
-				SECRET = `cat $SECRET_FILE`
-				echo "The secret file data is: $SECRET"
+				sh 'SECRET = `cat $SECRET_FILE`'
+				sh 'echo "The secret file data is: $SECRET"'
                 sh 'npm install' 
             }
         }
