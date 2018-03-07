@@ -3,7 +3,12 @@ pipeline {
         dockerfile true
     }
 	
-	environment { CI = 'true' }
+	environment { 
+		CI = 'true'
+		SECRET_FILE = credentials('secret')
+		SECRET = `cat $SECRET_FILE`
+		echo "The secret file data is: $SECRET"
+	}
 	
 	stages {
 		stage('Build') { 
