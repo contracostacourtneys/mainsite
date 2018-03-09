@@ -1,4 +1,6 @@
 // var env = require('dotenv').load();
+console.log(process.env.NODE_ENV);
+
 const { TEST_DB_URL,
  MAILGUN_KEY,
  MAILGUN_DOMAIN,
@@ -9,7 +11,8 @@ const { TEST_DB_URL,
  COSMOSDB_CONNSTR,
  COSMOSDB_DBNAME,
  JWT_SECRET,
- NODE_ENV } = require('../../secret.env');
+ NODE_ENV } = process.env;
+ // require('../../secret.env');
 // console.log(process.env);
 
 //auth settings
