@@ -14,8 +14,8 @@ const { TEST_DB_URL,
  NODE_ENV } = process.env;
  // require('../../secret.env');
 // console.log(process.env);
-console.log(COOKIE_ENCRYPTION_KEYS);
-console.log(typeof(COOKIE_ENCRYPTION_KEYS));
+// console.log(COOKIE_ENCRYPTION_KEYS);
+// console.log(typeof(COOKIE_ENCRYPTION_KEYS));
 
 //auth settings
 const creds = {
