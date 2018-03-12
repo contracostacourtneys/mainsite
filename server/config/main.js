@@ -1,6 +1,6 @@
 // var env = require('dotenv').load();
-console.log(process.env.NODE_ENV);
-console.log(process.env.TEST_DB_URL);
+// console.log(process.env.NODE_ENV);
+// console.log(process.env);
 const { TEST_DB_URL,
  MAILGUN_KEY,
  MAILGUN_DOMAIN,

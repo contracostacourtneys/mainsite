@@ -1,4 +1,4 @@
-const {SC_CHAT_API_KEY, GUARDIANSHIP_CHAT_API_KEY, GENERAL_CHAT_API_KEY} = require('../../secret.env');
+const {SC_CHAT_API_KEY, GUARDIANSHIP_CHAT_API_KEY, GENERAL_CHAT_API_KEY} = process.env;
 
 const apiai = require('apiai');
 const aiSmallClaims = apiai(SC_CHAT_API_KEY);
