@@ -34,7 +34,7 @@ class ChatContainer extends React.Component {
     }
     return (
       <div>
-        {/* pushes out settings/navbar*/}
+        {/* pushes out settings/navbar*/} 
 
         <Menu
           pageWrapId={'page-wrap'}

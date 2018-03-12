@@ -6,30 +6,12 @@
   // -o-transition: transform 400ms ease-in;
   // transition: transform 400ms ease-in;
   // transition: transform 400ms ease-in, -webkit-transform 400ms ease-in;
-}
+  
 
-#bot.slideIn {
-  // -webkit-transform: translateX(0);
-  // -ms-transform: translateX(0);
-  // transform: translateX(0);
-  transition: right 2s;
-  right: 0rem;
-
-
-    .bm-cross-button {
-    padding-left: 0rem;
-  }
-}
-
-
-#bot.slideOut {
- // slides out chatbot completely even when sidenav is still open
-  // -webkit-transform: translateX(32em);
-  // -ms-transform: translateX(32em);
-  // transform: translateX(32em);
-
+  // moved base positioning of bot here from #bot.slideOut
   right: -32rem;
   position: relative;
+  transition: right 0.5s;
   box-sizing: border-box;
   width: calc(100% + 32rem);
   padding: 0 10rem 0;
@@ -38,6 +20,48 @@
   }
 }
 
+#bot.slideIn {
+  // -webkit-transform: translateX(0);
+  // -ms-transform: translateX(0);
+  // transform: translateX(0);
+
+  right: 10rem;
+  .bm-cross-button {
+    padding-left: 0rem;
+
+  }
+
+}
+
+#bot.slideOut {
+ // slides out chatbot completely even when sidenav is still open
+
+ // translateX cross browser compatibility issues in IE
+ // because IE doesnt like translate inside a fixed position element
+  // -webkit-transform: translateX(32em);
+  // -ms-transform: translateX(32em);
+  // transform: translateX(32em);
+
+
+  right: -38rem;
+  // position: relative;
+  // transition: right 2s; //added
+  // box-sizing: border-box;
+  // width: calc(100% + 32rem);
+  // padding: 0 10rem 0;
+  .bm-cross-button {
+    padding-left: 5rem;
+  }
+
+  //fix to get settings icon to slide out on close
+  .bm-menu-wrap {
+    -webkit-transition: all 0.6s; 
+    -o-transition: all 0.6s; 
+    transition: all 0.6s; 
+    -webkit-transform: translate3d(100%, 0px, 0px); 
+            transform: translate3d(100%, 0px, 0px)
+  }
+}
 
 #root {
   height: 100%;
