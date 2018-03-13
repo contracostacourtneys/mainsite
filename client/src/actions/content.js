@@ -17,7 +17,7 @@ const {
   API_SPACE_ID,
   API_TOKEN,
   SMALL_CLAIMS_ID 
-} = process.env
+} = require('../../../server/config/main')
 
 
 export function fetchCategories() {
