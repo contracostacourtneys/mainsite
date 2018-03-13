@@ -1,0 +1,9 @@
+#jenkins notes
+
+NODE_ENV = "local_test" or "dev_server"
+
+environmental vars
+
+jenkins branch
+
+
