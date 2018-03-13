@@ -144,8 +144,8 @@ useMongoDBSessionStore: true,
 
 // How long you want to keep session in mongoDB.
 mongoDBSessionMaxAge: 24 * 60 * 60,  // 1 day (unit is second)
-API_BASE_URL: API_BASE_URL,
-API_SPACE_ID: API_SPACE_ID,
-  API_TOKEN: API_TOKEN,
-  SMALL_CLAIMS_ID: SMALL_CLAIMS_ID
+API_BASE_URL,
+API_SPACE_ID,
+  API_TOKEN,
+  SMALL_CLAIMS_ID
 };

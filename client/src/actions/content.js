@@ -12,12 +12,12 @@ import { STORE_STAGE_ID } from './types'
 // export const FETCH_POST = 'FETCH_POST';
 // export const FETCH_ASSET = 'FETCH_ASSET';
 
-const {
+import {
   API_BASE_URL,
   API_SPACE_ID,
   API_TOKEN,
   SMALL_CLAIMS_ID 
-} = require('../../../server/config/main')
+} from '../../../server/config/main'
 
 
 export function fetchCategories() {
