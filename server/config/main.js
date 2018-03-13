@@ -11,11 +11,8 @@ const { TEST_DB_URL,
  COSMOSDB_CONNSTR,
  COSMOSDB_DBNAME,
  JWT_SECRET,
- NODE_ENV,
-API_BASE_URL,
-  API_SPACE_ID,
-  API_TOKEN,
-  SMALL_CLAIMS_ID } = process.env;
+ NODE_ENV
+ } = process.env;
  // require('../../secret.env');
 // console.log(process.env);
 // console.log(COOKIE_ENCRYPTION_KEYS);
@@ -144,8 +141,5 @@ useMongoDBSessionStore: true,
 
 // How long you want to keep session in mongoDB.
 mongoDBSessionMaxAge: 24 * 60 * 60,  // 1 day (unit is second)
-API_BASE_URL,
-API_SPACE_ID,
-  API_TOKEN,
-  SMALL_CLAIMS_ID
+
 };

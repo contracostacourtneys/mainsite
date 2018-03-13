@@ -16,7 +16,7 @@ const API_BASE_URL = process.env.API_BASE_URL;
 const API_SPACE_ID = process.env.API_SPACE_ID;
 const API_TOKEN = process.env.API_TOKEN;
 const SMALL_CLAIMS_ID = process.env.SMALL_CLAIMS_ID;
-console.log("client side process env", process.env);
+// console.log("client side process env", process.env);
 
 export function fetchCategories() {
   const request = axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=category`);

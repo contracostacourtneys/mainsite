@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "webpack-dev-server --hot --inline",
+    "build": "webpack --config ./webpack.config.js",
     "start": "webpack --config ./webpack.config.js && nodemon ./server/index.js"
   },
   "repository": {
