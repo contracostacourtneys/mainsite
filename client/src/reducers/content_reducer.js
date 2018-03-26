@@ -59,9 +59,9 @@ export default function(state = INITIAL_STATE, action) {
     for (let i = 0; i < assets.length; i++) {
       const asset = assets[i];
       const url = asset.fields.file.url;
+      const title = asset.fields.title;
 
       const item = items[i];
-      const title = item.fields.title;
       const category = item.fields.categoryId;
       const subcategory = item.fields.subcategoryId;
       
@@ -93,7 +93,7 @@ export default function(state = INITIAL_STATE, action) {
       }
 
       const subcategoryObj = categoryObj.subcategories[subcategory];
-      subcategoryObj.videos[item.sys.id] = { id: item.sys.id, linkTo: title, title };
+      subcategoryObj.videos[asset.sys.id] = { id: asset.sys.id, linkTo: title, url, title };
     }
 
     return { ...state, videos, videoURLs };
