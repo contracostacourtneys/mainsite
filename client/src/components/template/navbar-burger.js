@@ -2,14 +2,18 @@ import React, { Component } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 
 export default class NavbarBurger extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
-      menuClicked: false
+      menuClicked: false,
+      menuLinks: props.menuLinks
     }
     this.menuClosed = this.menuClosed.bind(this)
   }
 
+  componentDidMount() {
+    console.log(this.state.menuLinks, "this.state.menuLinks")
+  }
   menuClosed() {
     this.setState({ menuClicked: true })
   }
@@ -23,7 +27,7 @@ export default class NavbarBurger extends Component {
 			<div className="Menu-burger" >
         {/*this is a hidden checkbox that will receive click*/}
         <input className="Menu-burger-checkbox" type="checkbox" onClick={() => this.menuOpened()} />
-        {/*the hamburger part of the menu*/}
+        {/*the hamburger part of the menu --->*/}
         <span></span>
         <span></span>
         <span><p>MENU</p></span>

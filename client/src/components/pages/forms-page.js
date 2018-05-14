@@ -9,66 +9,6 @@ import formData from '../../../data/jcFormsSC.js'
 // const test_server = "http://45.33.45.17:3000";
 // const dev_server = "http://dev-eforms-viewer.ad.cc-courts.org";
 
-// const formData = [
-// 	{
-// 		formName: "SC-100", 
-// 		category: "Small Claims",
-// 		dateRevised: "Jan. 1, 2017",
-// 		description: "Plaintiff’s Claim and Order to Go to Small Claims Court",
-//     link: dev_server+"/?form=sc100" 
-// 	}, 
-// 	{
-// 		formName: "SC-100-INFO", 
-// 		category: "Small Claims",
-// 		dateRevised: "Jan. 1, 2017",
-// 		description: "Information for the Small Claims Plaintiff", 
-//     link: "" 
-// 	},
-// 	{
-// 		formName: "SC-100A", 
-// 		category: "Small Claims",
-// 		dateRevised: "Jan. 1, 2017",
-// 		description: "Other Plaintiffs or Defendants", 
-//     link: dev_server+"/?form=sc100a"
-// 	},
-//   {
-//     formName: "SC-112A", 
-//     category: "Small Claims",
-//     dateRevised: "Jan. 1, 2017",
-//     description: "Proof of Service by Mail", 
-//     link: dev_server+"/?form=sc112a"
-//   },
-//   {
-//     formName: "SC-120", 
-//     category: "Small Claims",
-//     dateRevised: "Jan. 1, 2017",
-//     description: "Defendant’s Claim and ORDER to Go to Small Claims Court (Small Claims)", 
-//     link: dev_server+"/?form=sc120"
-//   },
-//   {
-//     formName: "SC-120A", 
-//     category: "Small Claims",
-//     dateRevised: "Jan. 1, 2017",
-//     description: "Other Plaintiffs or Defendants (Small Claims)", 
-//     link: dev_server+"/?form=sc120a"
-//   },
-//   {
-//     formName: "SC-140", 
-//     category: "Small Claims",
-//     dateRevised: "Jan. 1, 2017",
-//     description: "Notice of Appeal", 
-//     link: dev_server+"/?form=sc140"
-//   },
-// 	{
-// 		formName: "E-Test", 
-// 		category: "Eviction",
-// 		dateRevised: "Jan. 1, 2017",
-// 		description: "Eviction test",
-//     link: "" 
-// 	}
-// ]
-
-
 export default class FormsHome extends React.Component {
   constructor() {
     super();

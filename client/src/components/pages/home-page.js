@@ -11,7 +11,7 @@ import { DEFAULT_LANG } from '../../actions/types';
 class HomePage extends React.Component {
   componentWillMount() {
       this.props.categories.length === 0 && this.props.fetchCategories()
-      console.log(this.props.categories, 'this.props.categories')
+      //console.log(this.props.categories, 'this.props.categories')
   }
   // constructor() {
   //   super()

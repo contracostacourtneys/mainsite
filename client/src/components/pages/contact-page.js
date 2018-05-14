@@ -1,64 +1,154 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import TitleLine from '../template/title-line';
 import InfoBox from '../template/info-box';
+import { Link } from 'react-router-dom';
+import { fetchContactPage } from '../../actions/content';
+import { connect } from 'react-redux';
+const ReactMarkdown = require('react-markdown')
 
-const Directories = [
-	{
-		title: "Immigration Resources",
-		url: "http://www.courts.ca.gov/immigration.htm"
-	},
-	{
-		title: "Find My Court",
-		url: "http://www.courts.ca.gov/find-my-court.htm"
-	},
-	{
-		title: "National Domestic Violence Hotline",
-		url: "http://www.thehotline.org/"
-	}, 
-	{
-		title: "Find Free Legal Help in Your Area",
-		url: "http://www.courts.ca.gov/documents/SIJS_Non-Profit_Legal_Organizations.pdf"
-	},
-	{
-		title: "Ask a Law Librarian",
-		url: "http://www.questionpoint.org/crs/servlet/org.oclc.admin.BuildForm?&page=frame&institution=11341&type=2&language=1"
+class Contact extends Component {
+	constructor() {
+		super()
 	}
-]
 
+	componentWillMount() {
+		this.props.fetchContactPage()
+	}
 
-export default class Contact extends Component {
-	
 	render() {
+		const lang = this.props.language;
 
-		const renderedDirectories = Directories.map((item) => {
-      return (
-        <div>
-          <a href={item.url} target="_blank">{item.title}</a>
-        </div>
-      )
-    })
+		const renderedSections = this.props.contactSections.map((section) => {
+			const markedContent = <ReactMarkdown source={section.fields.blockText[lang]} />
+			return (
+
+				<InfoBox
+					boxTitle={section.fields.title[lang]}
+					boxContent={markedContent}
+					key={section.sys.id} />
+			)
+		})
+
+
+		const renderedTitle = <TitleLine title={this.props.contactTitle[lang]} />
+		console.log(this.props.contactTitle, 'contactTitle')
 
 		return (
 			<div>
-				<TitleLine title="Contact Information" />
-				<div className="grid grid-pad">
-						<InfoBox 
-							boxTitle="Directories"
-							boxContent={renderedDirectories}
-							buttonVisibilityClass="hidden"
-						/>
-						<InfoBox 
-							boxTitle="Give us Feedback!"
-							boxContent="Answer our quick online survey​​ and help to make the Self-Help Law Center better! We are working to keep the Self-Help Law Center as updated as possible and will be using public feedback to make improvements to the site.​​​"
-							buttonVisibilityClass="hidden"
-						/>
-						<InfoBox 
-							boxTitle="Missing or Incorrect Content?"
-							boxContent="If there is any content on the site that should be updated or if there is a link we should add, please let us know​!​​​​​"
-							buttonVisibilityClass="hidden"
-						/>
-				</div>
+				{renderedTitle}
+				{renderedSections}
 			</div>
 		)
 	}
 }
+
+function mapStateToProps(state) {
+  return { 
+  	contactTitle: state.content.contactTitle,
+  	contactSections: state.content.contactSections,
+  	language: state.content.language
+  }
+}
+
+export default connect(mapStateToProps, { fetchContactPage })(Contact)
+
+/*import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { fetchContactPage } from '../../actions/content.js';
+import { fetchContact } from '../../actions/content.js';
+import InfoBox from '../template/info-box';
+import TitleLine from '../template/title-line';
+
+class Contact extends Component {
+	componentWillMount() {
+		this.props.fetchContact()
+	}
+
+	renderTitle() {
+		return (
+			this.props.contactObj.items.map((item) => {
+				return item.fields.title
+			})
+		)
+	}
+
+	/// whhyyyyyyy is this not working
+	// FYI for tomorrow: 
+	// 1. added new contact actions-- should remove those
+	// 2. added reducers
+	// NEED TO FIGURE OUT WHY THERES A DELAY UPDATE JUST FOR THIS COMPONENT
+
+	render() {
+		const lang = this.props.language
+		const renderedTitle = this.props.contactObj.items.map((item) => {
+			return (<TitleLine title={item.fields.title[lang]} />)
+		})
+		console.log(this.props.contactObj)
+		
+		return (
+			<div>
+				{renderedTitle}
+			</div>
+		)
+	}
+}  
+
+function mapStateToProps(state) {
+  return { 
+    contactObj: state.content.contactObj,
+    language: state.content.language
+   };
+}
+
+export default connect(mapStateToProps, { fetchContact })(Contact);
+
+// const Directories = [
+// 	{
+// 		title: "Immigration Resources",
+// 		url: "http://www.courts.ca.gov/immigration.htm"
+// 	},
+// 	{
+// 		title: "Find My Court",
+// 		url: "http://www.courts.ca.gov/find-my-court.htm"
+// 	},
+// 	{
+// 		title: "National Domestic Violence Hotline",
+// 		url: "http://www.thehotline.org/"
+// 	}, 
+// 	{
+// 		title: "Find Free Legal Help in Your Area",
+// 		url: "http://www.courts.ca.gov/documents/SIJS_Non-Profit_Legal_Organizations.pdf"
+// 	},
+// 	{
+// 		title: "Ask a Law Librarian",
+// 		url: "http://www.questionpoint.org/crs/servlet/org.oclc.admin.BuildForm?&page=frame&institution=11341&type=2&language=1"
+// 	}
+// ]
+
+/* 
+
+this.props.fetchContactPage()
+
+<div className="Contact">
+  <TitleLine title={this.props.contact.title["en-US"]} />
+  <div className="grid grid-pad">
+    {this.renderSections()}
+  </div>
+</div>
+
+renderSections() {
+    const lang = this.props.language;
+    console.log(this.props.contact.title, '4. this.props.contact.title')
+    // return this.props.contact.fields.map((item) => {
+    //   return (
+    //     <InfoBox 
+				// 	boxTitle={item.fields.title[lang]}
+				// 	boxContent={item.fields.blockText[lang]}
+				// 	key={item.sys.id} />
+    //   );
+    // });
+  }
+
+
+*/

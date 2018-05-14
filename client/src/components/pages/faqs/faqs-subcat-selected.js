@@ -6,14 +6,14 @@ import TitleLine from '../../template/title-line';
 import AccordionBox from '../../template/accordion-box/accordion-box-container'
 const ReactMarkdown = require('react-markdown')
 
-const stage = {
-	"2b9rCFvuQ0iyOKQ26uO8ow": "Prepare and File a Claim",
-	"6gfGyfVjEcuEuEAEi2OOWI": "Serving Your Court Papers",
-	"6NhQ3ae4362oeGSiCwseIa": "After Being Served",
-	"5IGXI1SREcyMY6IKYSmoWW": "Rescheduling My Court Date",
-	"hAQbOpDcMSqIqswE26iWC": "Appeal, Collect, or Vacate Judgement",
-	"3i48AXKI7SQEk4seuY8oAY": "Examples of Small Claims Cases Heard"
-}
+// const stage = {
+// 	"2b9rCFvuQ0iyOKQ26uO8ow": "Prepare and File a Claim",
+// 	"6gfGyfVjEcuEuEAEi2OOWI": "Serving Your Court Papers",
+// 	"6NhQ3ae4362oeGSiCwseIa": "After Being Served",
+// 	"5IGXI1SREcyMY6IKYSmoWW": "Rescheduling My Court Date",
+// 	"hAQbOpDcMSqIqswE26iWC": "Appeal, Collect, or Vacate Judgement",
+// 	"3i48AXKI7SQEk4seuY8oAY": "Examples of Small Claims Cases Heard"
+// }
 
 class FaqsSelectedSubcategory extends Component {
 	constructor() {
@@ -48,18 +48,28 @@ class FaqsSelectedSubcategory extends Component {
 	renderBreadcrumbs(lang) {
 		const currentSection = this.props.match.params.page
 		const currentStage = this.props.match.params.subcat
+		const faqSubcat = this.props.faqSubcat
+		let subcatTitle;
+		for (var i=0; i< faqSubcat.length; i++) {
+			for (var key in faqSubcat[i]) {
+				if (faqSubcat[i].sys.id == currentStage) {
+					subcatTitle = faqSubcat[i].fields.title[lang]
+					console.log(subcatTitle, "SubcatTitle")
+				}
+			}
+		}
 		return (
 			<div className="breadcrumbs">
         <Link to="/faqs">FAQs</Link>
         <span className="breadcrumbs-chevron">></span>
         <Link to={`/faqs/${this.props.match.params.page}`}>{this.toUpperCase(currentSection)}</Link>
         <span className="breadcrumbs-chevron">></span>
-        <Link to={`/faqs/${this.props.match.params.page}/${this.props.match.params.subcat}`}>{stage[currentStage]}</Link>
+        <Link to={`/faqs/${this.props.match.params.page}/${this.props.match.params.subcat}`}>{subcatTitle}</Link>
       </div>
     )
 	}
 	
-
+ 
 	render() {
 
 		const lang = this.props.language;
@@ -105,7 +115,8 @@ class FaqsSelectedSubcategory extends Component {
 
 function mapStateToProps(state) {
   return { faqs: state.content.faqs,
-  				 language: state.content.language  }
+  				 language: state.content.language,
+  				 faqSubcat: state.content.faqSubcategories  }
 }
 
 export default connect(mapStateToProps, { fetchFaqs })(FaqsSelectedSubcategory)

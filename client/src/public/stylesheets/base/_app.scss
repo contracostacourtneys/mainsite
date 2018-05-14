@@ -349,6 +349,10 @@ hr {
   }
 }
 
+.Menu-logo:hover {
+  -webkit-font-smoothing: antialiased;
+}
+
 .Menu-links {
   display:none;
   @include lg {
@@ -421,7 +425,12 @@ hr {
   }
    .Menu-burger-checkbox:checked ~ span:nth-last-child(2) {
       transform: rotate(-45deg) translate(0, -1px);
+      p {
+        opacity: 0;
+      }
   }
+
+
 
   span {
     display: block;
@@ -455,19 +464,15 @@ hr {
   span:nth-last-child(2), p {
     transform-origin: 0% 100%;
   }
-
-
-
   // display: block;
-  // position: relative;
-  
+  // position: relative;  
 }
 
 .Menu-links-burger {
   display: block;
   position: absolute;
-  width: 350px;
-  height: 100vh;
+  width: 120vw; // 350px
+  height: 120vh; // 100vh
   margin: -100px 0 0 -50px;
   padding: 12rem 0 5rem 5rem;
   // padding-top: 125px;
@@ -691,7 +696,12 @@ hr {
   // }
 
   padding: 2rem;
-
+  a {
+    text-decoration: underline;
+  }
+  a:hover {
+    color: $blue-accent-primary;
+  }
 }
 
 .Info-box-btn {

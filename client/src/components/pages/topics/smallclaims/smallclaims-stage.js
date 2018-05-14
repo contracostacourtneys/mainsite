@@ -41,16 +41,20 @@ const partyIds = [
 // ]
 
 const stageIds = {
-   'before': '5iDqJ92Rzqksq88gYWawE4',
-   'during': '1cMyrIaZ680ukwwSi8YscC',
-   'after': '4HkTlYlsFqqIgscmGWOCkk'
+   'overview': '4ai240PycUw00eWUQqMwW4',
+   'filing-a-case': '5iDqJ92Rzqksq88gYWawE4',
+   'responding-to-a-claim': '60tEp7giyceYKSuaoIUgUy',
+   'day-in-court': '4HkTlYlsFqqIgscmGWOCkk',
+   'judges-decision': '1cMyrIaZ680ukwwSi8YscC',
+   'paying-a-judgement': '30KxWcbWQEwgMO8CKYmQCG',
+   'collecting-a-judgement': '2ucYI8L74Qs6mWag6aygCo'
   };
 
 // const stageTitleIdx = {
 //   'before': 0,
 //   'during': 1,
 //   'after': 2
-// };
+// }; 
 
 class SmallClaimsStage extends Component {
   constructor(props) {
@@ -59,7 +63,7 @@ class SmallClaimsStage extends Component {
       // selectedStageId: this.props.stageId.id,
       // selectedStageTitle: this.props.stageId.title,
       // selectedContent: [],
-      selectedParty: '',
+      selectedParty: '',  
     }
     this.renderMenuLinks = this.renderMenuLinks.bind(this)
     // this.filterContent = this.filterContent.bind(this)
@@ -67,7 +71,7 @@ class SmallClaimsStage extends Component {
     this.toUpperCase = this.toUpperCase.bind(this);
   }
   componentWillMount() {
-    // before component mounts, load content by selected party
+    // before component mounts, load content by selected party 
     let _partyId;
     // check if params.party matches the partyId[x].name
     if (this.props.match.params.party === partyIds[0].name) {
@@ -88,6 +92,70 @@ class SmallClaimsStage extends Component {
     }
 
   }
+
+  renderMenuLinks(lang) {
+
+    return this.props.stages
+    .map((stage) => {
+      return stage.url !== this.props.match.params.stage && (
+        <div className="Stage-menu-item" key={stage.id}>
+          <Link to={stage.url}>{stage.titles[lang]}</Link>
+        </div>
+      )
+    })
+  }
+
+  toUpperCase(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  
+  render() {
+    const currentTitle = this.state.selectedStageTitle
+    const currentSection = this.props.match.params.party
+    console.log("current stage: ", this.props.stages);
+    console.log("lang: ", this.props.language);
+    return this.props.stages.length !== 0 && this.props.stageContent.length !== 0 && (
+      <div>
+        <Bot />
+        {/*<div className="Stage-top-bar">
+          <div className="breadcrumbs">
+            <Link to="/">Home</Link>
+            <span className="breadcrumbs-chevron">></span>
+            <Link to="/smallclaims">Small Claims</Link>
+            <span className="breadcrumbs-chevron">></span> 
+            <Link to={`/smallclaims/${this.props.match.params.party}`}>{this.toUpperCase(currentSection)}</Link>
+          </div>
+          <div className="Stage-menu">
+            {this.renderMenuLinks(this.props.language)}
+          </div>
+        </div>*/}
+      {/* place holder, need to work out how to display the title w/out relying on redux store */}
+        <TitleLine title={this.props.stages.find(stage => stage.url === this.props.match.params.stage).titles[this.props.language]} />
+        {/*this.filterContent(this.props.content, this.state.selectedStageId, this.props.language)*/}
+        <AccordionBoxContainer stageContent={ 
+          this.props.stageContent.filter(tab => { return tab.stageId === stageIds[this.props.match.params.stage] })
+                      .sort((a, b) => a.id - b.id )} />
+      </div>
+    )
+  } 
+}
+
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({fetchStages, fetchContentByParty}, dispatch);
+}
+
+function mapStateToProps(state) {
+  return { 
+    stageContent: state.content.tabs,
+    stages: state.content.stages,
+    content: state.content, 
+    stageId: state.content.stageId,
+    language: state.content.language
+  };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(SmallClaimsStage);
+
 
   // componentWillUpdate() {
 
@@ -127,66 +195,3 @@ class SmallClaimsStage extends Component {
 
   //   }, []);
   // }
-
-  renderMenuLinks(lang) {
-
-    return this.props.stages
-    .map((stage) => {
-      return stage.url !== this.props.match.params.stage && (
-        <div className="Stage-menu-item" key={stage.id}>
-          <Link to={stage.url}>{stage.titles[lang]}</Link>
-        </div>
-      )
-    })
-  }
-
-  toUpperCase(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
-
-  
-  render() {
-    const currentTitle = this.state.selectedStageTitle
-    const currentSection = this.props.match.params.party
-    console.log("current stage: ", this.props.stages);
-    console.log("lang: ", this.props.language);
-    return this.props.stages.length !== 0 && this.props.stageContent.length !== 0 && (
-      <div>
-        <Bot />
-        <div className="Stage-top-bar">
-          <div className="breadcrumbs">
-            <Link to="/">Home</Link>
-            <span className="breadcrumbs-chevron">></span>
-            <Link to="/smallclaims">Small Claims</Link>
-            <span className="breadcrumbs-chevron">></span> 
-            <Link to={`/smallclaims/${this.props.match.params.party}`}>{this.toUpperCase(currentSection)}</Link>
-          </div>
-          <div className="Stage-menu">
-            {this.renderMenuLinks(this.props.language)}
-          </div>
-        </div>
-      {/* place holder, need to work out how to display the title w/out relying on redux store */}
-        <TitleLine title={this.props.stages.find(stage => stage.url === this.props.match.params.stage).titles[this.props.language]} />
-        {/*this.filterContent(this.props.content, this.state.selectedStageId, this.props.language)*/}
-        <AccordionBoxContainer stageContent={ 
-          this.props.stageContent.filter(tab => { return tab.stageId === stageIds[this.props.match.params.stage] })
-                      .sort((a, b) => a.id - b.id )} />
-      </div>
-    )
-  } 
-}
-
-function mapDispatchToProps(dispatch){
-  return bindActionCreators({fetchStages, fetchContentByParty}, dispatch);
-}
-
-function mapStateToProps(state) {
-  return { 
-    stageContent: state.content.tabs,
-    stages: state.content.stages,
-    content: state.content, 
-    stageId: state.content.stageId,
-    language: state.content.language
-  };
-}
-export default connect(mapStateToProps, mapDispatchToProps)(SmallClaimsStage);

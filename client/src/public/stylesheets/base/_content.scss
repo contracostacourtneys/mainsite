@@ -1,0 +1,83 @@
+.Accordion-box-item {
+  position: relative;
+  cursor: pointer;
+  width: 100%;
+  h3 {
+    padding: 1.5rem 2.5rem 1.5rem 2rem;
+    margin: 0;
+    //margin: 1.5rem 2.5rem 1rem 0;
+    font-family: $font-family-sans-serif;
+  }
+  h3:hover {
+    color: $blue-accent-primary;
+  }
+}
+
+.Accordion-box-icon {
+  font-size: 3rem;
+  top: 1rem;
+  position: absolute;
+  right: 0.5rem;
+  @include sm {
+    right: 2rem; 
+  }
+}
+
+.blue-font {
+  color: $blue-accent-primary;
+}
+
+.Accordion-box-content {
+  color: $dark-grey-primary;
+  p {
+    display: block;
+    padding: 0 2rem 0 2rem;
+    margin: 1rem 0;
+  }
+  a {
+    text-decoration: underline;
+  }
+  a:hover {
+    color: $blue-accent-primary;
+  }
+  padding: 0.5rem 2rem 2rem 2rem;
+	background-color: $light-grey-primary;
+	&:hover {
+		cursor: default;
+	}
+	h3 {
+		font-family: $font-family-serif;
+		padding: 1.5rem 2.5rem 1rem 2rem;
+		font-size: 2rem;
+		&:hover {
+			color: $dark-grey-primary;
+		}
+	}
+	strong {
+
+	}
+	ul {
+		list-style-image: url('../../img/icn-li.svg');
+	}
+
+	li {
+		padding-left: 1rem;
+
+	}
+	blockquote {
+		//margin-left: 2rem;
+		p {
+			padding: 0;
+		}
+	}
+} 
+
+.Accordion-box-line {
+  border: 2px solid $light-grey-primary;
+  padding: 0rem;
+  margin: 0;
+}
+
+.Accordion-box-grey {
+	background-color: $light-grey-primary;
+}

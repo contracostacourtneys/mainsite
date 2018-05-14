@@ -42,10 +42,9 @@ class AccordionBoxContainer extends Component {
 
 	  let renderedContent = [];
 
-    // yuck
+    // used to render videolinks
     if (this.props.type === 'links' && this.props.hasOwnProperty('itemField')) {
 
-      // also yuck
       renderedContent = Object.keys(this.props.stageContent)
       // .sort((a, b) => a.title > b.title)
       .map((contentKey) => {
@@ -62,7 +61,7 @@ class AccordionBoxContainer extends Component {
               </span>
             </h3>
             
-            <div className={this.state.activeId == tab.id && this.state.pressed == true ? " ": "hidden"}> 
+            <div className={this.state.activeId == tab.id && this.state.pressed == true ? " ": "hidden"}> {/*&& this.state.pressed == true */}
               <div className="Accordion-box-content">
                 {
                   Object.keys(links).map((linkKey) => {
@@ -100,6 +99,7 @@ class AccordionBoxContainer extends Component {
         )
       })
     }
+    // used to render non-videoLink stageContent
     else {
       const lang = this.props.language;
     //   renderedContent = renderedContent.concat(this.props.stageContent)
@@ -112,7 +112,7 @@ class AccordionBoxContainer extends Component {
         // console.log("tab: ", tab);	
         return (
   				<div className="Accordion-box-item " key={tab.id}>
-  					<h3 onClick={() => this.toggleClass(tab.id)} className={this.state.activeId == tab.id && this.state.pressed == true ? "blue-font": " "} >
+  					<h3 onClick={() => this.toggleClass(tab.id)} className={this.state.activeId == tab.id && this.state.pressed == true ? "blue-font Accordion-box-grey": " "} >
               {tab.titles[lang]}
 
               <span className="Accordion-box-icon">

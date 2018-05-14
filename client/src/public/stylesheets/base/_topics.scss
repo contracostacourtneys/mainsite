@@ -73,52 +73,6 @@ h1.title-line-background {
   }
 }
 
-.Accordion-box-item {
-  position: relative;
-  cursor: pointer;
-  width: 100%;
-  h3 {
-    margin: 1.5rem 2.5rem 1rem 0;
-    //padding: 1.5rem 2.5rem 1rem 0;
-    font-family: $font-family-sans-serif;
-  }
-  h3:hover {
-    color: $blue-accent-primary;
-  }
-}
-
-.Accordion-box-icon {
-  font-size: 3rem;
-  top: -0.75rem;
-  position: absolute;
-  right: 0.5rem;
-  @include sm {
-    right: 2rem; 
-  }
-}
-
-.blue-font {
-  color: $blue-accent-primary;
-}
-
-.Accordion-box-content {
-  color: $dark-grey-primary;
-  p {
-    display: block;
-  }
-  a {
-    text-decoration: underline;
-  }
-  a:hover {
-    color: $blue-accent-primary;
-  }
-} 
-
-.Accordion-box-line {
-  border: 2px solid $light-grey-secondary;
-  padding: 0rem;
-}
-
 .warning {
   background-color: $warning;
   padding: 1rem 1rem 0.01rem 1rem;

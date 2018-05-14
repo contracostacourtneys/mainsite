@@ -15,6 +15,7 @@ class Forms extends Component {
 
 	render() {
 		const lang = this.props.language;
+		
 		const renderedTopics = this.props.formTopics.map((topic) => {
 			return (
 				<div className="Filter-list-group" key={topic.sys.id}>
@@ -35,6 +36,7 @@ class Forms extends Component {
 		const renderedTitle = this.props.formLayout.map((text) => {
 			return ( <TitleLine key={text.sys.id} title={text.fields.title[lang]} />)
 		})
+
 
 		return (
 			<div>

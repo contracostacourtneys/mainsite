@@ -23,7 +23,7 @@ class SmallClaimsParty extends Component {
 		// this.state = {
 		// 	buttonSelected: false,
 		// 	stageTitle: '',
-  //     stageId: null
+    //  stageId: null
 		// }
 		// this.onStageSelect = this.onStageSelect.bind(this);
 	}
@@ -34,10 +34,13 @@ class SmallClaimsParty extends Component {
 
   }
 
+  filterStageButtons() {
+    
+  }
 	// onStageSelect(title, id, e) {
- //    e.stopPropagation();
- //    // when stage selected, store stageId in state
- //    this.props.storeStageId(title, id);
+  //    e.stopPropagation();
+  //    // when stage selected, store stageId in state
+  //    this.props.storeStageId(title, id);
 	// }
 
 	render() {
@@ -67,18 +70,78 @@ class SmallClaimsParty extends Component {
     //   )
     // })
 
-    const renderedStages = this.props.stages
-    .map((stage) => {
+    // plaintiff id 2zYmskK1EUW22uukow4CaU
+    // defendant id mI8A9AawXACAmYEmSyU0g
+
+    const partyIds = {
+      plaintiff: '2zYmskK1EUW22uukow4CaU',
+      defendant: 'mI8A9AawXACAmYEmSyU0g'
+    }
+    // const renderedStages = this.props.stages
+    // .map((stage) => {
+    //   console.log(stage.party['en-US'][0].sys.id, 'stage.party') // this prints ID
+    //   if (stage.party['en-US'][0].sys.id == partyIds.plaintiff) {
+    //     return (
+    //       <div  className="Square-box-container" key={stage.id}>
+    //         <Link to={`${this.props.match.url}/${stage.url}`}>
+    //           <SquareBox
+    //             id={stage.id}
+    //             boxTitle={stage.titles[lang]}
+    //             assetId={stage.imageId}
+    //           />
+    //         </Link>
+    //       </div> 
+    //     )
+    //   }
+    //   else {
+    //     return (
+    //       <div  className="Square-box-container" key={stage.id}>
+    //         <Link to={`${this.props.match.url}/${stage.url}`}>
+    //           <SquareBox
+    //             id={stage.id}
+    //             boxTitle={stage.titles[lang]}
+    //             assetId={stage.imageId}
+    //           />
+    //         </Link>
+    //       </div> 
+    //     )
+    //   } 
+      // return (
+      // <div  className="Square-box-container" key={stage.id}>
+      //   <Link to={`${this.props.match.url}/${stage.url}`}>
+      //     <SquareBox
+      //       id={stage.id}
+      //       boxTitle={stage.titles[lang]}
+      //       assetId={stage.imageId}
+      //     />
+      //   </Link>
+      // </div> 
+      // )
+    //})
+
+    // const findSinglePartyStages = this.props.stages
+    // .filter((stage) => {
+    //   //console.log(currentParty, 'currentParty======')
+    //   if (stage.party['en-US'].length === 1) {
+    //     if (stage.party['en-US'][0].sys.id == partyIds.currentParty) {
+    //       return stage
+    //     }
+    //   }
+    // })
+
+    const renderedStages = this.props.stages.map((stage) => {
+      const currentParty = this.props.match.params.party;
+      console.log(currentParty, stage, '====currentParty')
       return (
-      <div  className="Square-box-container" key={stage.id}>
-        <Link to={`${this.props.match.url}/${stage.url}`}>
-          <SquareBox
-            id={stage.id}
-            boxTitle={stage.titles[lang]}
-            assetId={stage.imageId}
-          />
-        </Link>
-      </div> 
+        <div  className={stage.partyLabel['en-US']  === 'all' || stage.partyLabel['en-US'] === currentParty ? "Square-box-container " : "Square-box-container hidden"} key={stage.id}>
+         <Link to={`${this.props.match.url}/${stage.url}`}>
+           <SquareBox
+             id={stage.id}
+             boxTitle={stage.titles[lang]}
+             assetId={stage.imageId}
+           />
+         </Link>
+       </div> 
       )
     })
 
@@ -90,6 +153,10 @@ class SmallClaimsParty extends Component {
 
           {renderedStages}
 
+        </div>
+
+        <TitleLine title="More Resources" />
+        <div className="grid grid-pad">  
           <TextIconBox 
         		boxTitle="Small Claims Checklist"
         		boxContent="Use our interactive checklist to help you manage your small claims case before you file, during your case, and after a judgement has been made."
@@ -101,7 +168,7 @@ class SmallClaimsParty extends Component {
       		/>
 
         	<InfoBox 
-        		boxTitle="Resources"
+        		boxTitle="Resource Links"
         		boxContent={resources}
         		buttonVisibilityClass="hidden"
         		infoboxClass="Box Info-box small-box col-2"

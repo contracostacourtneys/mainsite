@@ -4,22 +4,6 @@ import TitleLine from '../../template/title-line';
 import { fetchFaqSubcategories } from '../../../actions/content';
 import { connect } from 'react-redux';
 
-const pageNames = {
-	general: "General",
-	smallclaims: "Small Claims",
-	dv: "Domestic Violence",
-	guardianship: "Guardianship",
-	traffic: "Traffic",
-	eviction: "Eviction",
-	family: "Family",
-	"reclamos-menores": "Reclamos menores",
-	dv: "Violencia Domestico",
-	"ley-familiar": "Ley Familiar",
-	desalojo: "Desalojo",
-	"tutela-de-menores": "Tutela de menores",
-	trafico: "Trafíco"
-}
-
 class SelectedFaqPage extends Component {
 	constructor() {
 		super()
@@ -34,6 +18,7 @@ class SelectedFaqPage extends Component {
 	}
 
 	renderSubCategories() {
+		const lang = this.props.language
 		return (
 			this.props.faqSubcategories.map((subcat) => {
 				return (
@@ -41,7 +26,7 @@ class SelectedFaqPage extends Component {
 						<hr className="cat-line"/>
 						<li className="Filter-topic">
 							<Link to={`/faqs/${this.props.match.params.page}/${subcat.sys.id}`}>
-							{subcat.fields.title["en-US"]}<i className="material-icons Filter-topic-icon">keyboard_arrow_right</i>
+							{subcat.fields.title[lang]}<i className="material-icons Filter-topic-icon">keyboard_arrow_right</i>
 							</Link>
 						</li>
 					</div>
@@ -74,9 +59,7 @@ class SelectedFaqPage extends Component {
         <Link to={`/faqs/${this.props.match.params.page}`}>{this.toUpperCase(currentSection)}</Link>
       </div>
     )
-	}
-  
-	
+	}  
 
 	render() {
 		const currentPageName = this.props.match.params.page

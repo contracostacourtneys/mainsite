@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch, Link, browserHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { CLIENT_ROOT_URL } from './actions/index';
-
+import { fetchMenuLinks } from './actions/content';
+import { fetchFooter } from './actions/content';
 // Import miscellaneous routes and other requirements
 import NotFoundPage from './components/pages/not-found-page';
 import UnderConstruction from './components/pages/under-construction';
 import Navbar from './components/template/navbar';
 import Footer from './components/template/footer';
 import Search from './components/template/search';
+//import Layout from './components/Layout';
 import Languages from './components/template/languages';
 // DONT DELETE commented Bot out to hide from all views until bot works for all case types.
 // for now bot will only live in small claims
@@ -71,11 +74,15 @@ import NewCase from './components/pages/new-case-page';
 // Import higher order components
 import RequireAuth from './components/auth/require-auth';
 
-export default class AppRouter extends Component {
+class AppRouter extends Component {
   constructor(props) {
       super(props);
   }
 
+  componentWillMount() {
+    this.props.fetchMenuLinks()
+    this.props.fetchFooter()
+  }
 
   render() {
     return (
@@ -87,7 +94,7 @@ export default class AppRouter extends Component {
             <div className="App">
               
               <div className="App-mask" />
-              <Navbar />
+              <Navbar menuLinks={this.props.menuLinks} language={this.props.language}/> 
               <Search />
               
 
@@ -99,6 +106,7 @@ export default class AppRouter extends Component {
               <div className="Page">
                 <Switch>
                   <Route exact path="/" component={HomePage} />
+                  <Route path="/home" component={HomePage} />
                     {/*if I want to load app and navs separately in {App} component, and load CaseType modules here--> */}
                     {/*<IndexRoute component={TopicsList} /> */} 
                   <Route path="/test" component={TestAccordionBox} />
@@ -165,6 +173,15 @@ export default class AppRouter extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return { 
+    menuLinks: state.content.menuLinks,
+    language: state.content.language,
+    footer: state.content.footer }
+}
+
+export default connect(mapStateToProps, { fetchMenuLinks, fetchFooter })(AppRouter)
 
 /*
 
