@@ -150,7 +150,7 @@ class AppRouter extends Component {
                   <Route path="/dv" component={UnderConstruction} />
                   <Route path="/traffic" component={UnderConstruction} />
                   <Route path="/adoption" component={UnderConstruction} />
-                  <Route path="/family" component={UnderConstruction} />
+                  <Route path="/family-law" component={UnderConstruction} />
 
                   <Route path="/profile" component={RequireAuth(ViewProfile)} />
 
