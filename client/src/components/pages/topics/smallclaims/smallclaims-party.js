@@ -24,8 +24,10 @@ class SmallClaimsParty extends Component {
 
   componentWillMount() {
     const smallClaimsId = "5iJkGCIR2gUoMKaeQOqo6W"
-    this.props.stages.length === 0 && this.props.fetchStages(smallClaimsId);
-    this.props.resources.length === 0 && this.props.fetchResourceLinks("SmallClaims");
+    // this.props.stages.length === 0 && this.props.fetchStages(smallClaimsId);
+    // this.props.resources.length === 0 && this.props.fetchResourceLinks(smallClaimsId);
+    this.props.fetchStages(smallClaimsId);
+    this.props.fetchResourceLinks(smallClaimsId);
     this.props.fetchChecklist();
 
   }
@@ -36,7 +38,7 @@ class SmallClaimsParty extends Component {
 			return (
 				<div key={item.resourceId}>
           {/*unavailable translations now default to 'en-US'*/}
-					<a href={item.url} target="_blank">{item.titles[lang] || item.titles['en-US']}</a>
+					<a href={item.slug} target="_blank">{item.titles[lang] || item.titles['en-US']}</a>
 				</div>
 			)
 		})
@@ -45,13 +47,14 @@ class SmallClaimsParty extends Component {
       plaintiff: '2zYmskK1EUW22uukow4CaU',
       defendant: 'mI8A9AawXACAmYEmSyU0g'
     }
+    
     console.log('this.props.stages', this.props.stages)
     const renderedStages = this.props.stages.map((stage) => {
       const currentParty = this.props.match.params.party;
-      console.log(currentParty, stage, '====currentParty')
+      //console.log(currentParty, stage, '====currentParty')
       return (
         <div  className={stage.partyLabel['en-US']  === 'all' || stage.partyLabel['en-US'] === currentParty ? "Square-box-container " : "Square-box-container hidden"} key={stage.id}>
-         <Link to={`${this.props.match.url}/${stage.url}`}>
+         <Link to={`${this.props.match.url}/${stage.slug}`}>
            <SquareBox
              id={stage.id}
              boxTitle={stage.title[lang]}
@@ -72,7 +75,7 @@ class SmallClaimsParty extends Component {
 
         <TitleLine title="More Resources" />
         <div className="grid grid-pad">  
-          <Link className="Text-icon-box-link" to={{pathname: "/checklist", state: {caseType: "smallClaims", party: this.props.match.params.party}}}>
+         
             <TextIconBox 
               className="Text-icon-box-container"
               boxTitle="Small Claims Checklist"
@@ -83,9 +86,8 @@ class SmallClaimsParty extends Component {
               caseType='smallClaims'
               party={this.props.match.params.party}
             />
-          </Link>
         	<InfoBox 
-        		boxTitle="Resource Links"
+        		boxTitle="Resources"
         		boxContent={resources}
         		buttonVisibilityClass="hidden"
         		infoboxClass="Box Info-box small-box col-2"
