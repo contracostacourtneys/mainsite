@@ -6,14 +6,18 @@ import TitleLine from '../../template/title-line';
 import AccordionBox from '../../template/accordion-box/accordion-box-container'
 const ReactMarkdown = require('react-markdown')
 
-// const stage = {
-// 	"2b9rCFvuQ0iyOKQ26uO8ow": "Prepare and File a Claim",
-// 	"6gfGyfVjEcuEuEAEi2OOWI": "Serving Your Court Papers",
-// 	"6NhQ3ae4362oeGSiCwseIa": "After Being Served",
-// 	"5IGXI1SREcyMY6IKYSmoWW": "Rescheduling My Court Date",
-// 	"hAQbOpDcMSqIqswE26iWC": "Appeal, Collect, or Vacate Judgement",
-// 	"3i48AXKI7SQEk4seuY8oAY": "Examples of Small Claims Cases Heard"
-// }
+// faqs/:category/:subcategoryId page 
+
+const categoryIds = {
+   'guardianship': '25rk8cpWJeA666YKwumQyu',
+   'eviction': '40LEWPHtDOyySwoYGisMkg', //6qxRrat4HKc8UUk4yCGuSg',
+   'dv': '6hxHMV13lS2qOMWi2q2wEq', 
+   'traffic': '63WBbSieDmCW6aiWWauOko',
+   'small-claims': '5iJkGCIR2gUoMKaeQOqo6W',
+   'family': '4O0eqo7xHOaMMA8WyYW80C',
+   'general': '2ucYI8L74Qs6mWag6aygCo'
+ };
+
 
 class FaqsSelectedSubcategory extends Component {
 	constructor() {
@@ -29,7 +33,6 @@ class FaqsSelectedSubcategory extends Component {
 
 	toggleClass(id) {
     if (this.state.activeId === id) {
-      console.log(id, 'selected id')
       this.setState({ 
         activeId: id,
         pressed: !this.state.pressed 
@@ -40,12 +43,11 @@ class FaqsSelectedSubcategory extends Component {
         pressed: true 
       });
     } 
-		//console.log(this.state, 'print this.state for toggleClass')
   }
 
-
 	componentWillMount() {
-		const label = this.props.match.params.page
+		const currentSubcat = this.props.match.params.page
+		const label = categoryIds[currentSubcat]
 		const subcatId = this.props.match.params.subcat
 		this.props.fetchFaqs(label, subcatId)
 	}
@@ -63,10 +65,10 @@ class FaqsSelectedSubcategory extends Component {
 			for (var key in faqSubcat[i]) {
 				if (faqSubcat[i].sys.id == currentStage) {
 					subcatTitle = faqSubcat[i].fields.title[lang]
-					console.log(subcatTitle, "SubcatTitle")
 				}
 			}
 		}
+
 		return (
 			<div className="breadcrumbs">
         <Link to="/faqs">FAQs</Link>
@@ -77,10 +79,8 @@ class FaqsSelectedSubcategory extends Component {
       </div>
     )
 	}
-	
  
 	render() {
-
 		const lang = this.props.language;
 		const renderedContent = this.props.faqs.map((faq) => {
 			return (
@@ -103,8 +103,7 @@ class FaqsSelectedSubcategory extends Component {
 				</div>
 			)    
 		})
-			
-
+		
 		return (
 			<div>
 				<TitleLine title={this.props.language == "en-US" ? "Frequently Asked Questions" : "Preguntas frecuentes" }  />
@@ -119,9 +118,10 @@ class FaqsSelectedSubcategory extends Component {
 }
 
 function mapStateToProps(state) {
-  return { faqs: state.content.faqs,
-  				 language: state.content.language,
-  				 faqSubcat: state.content.faqSubcategories  }
+  return { 
+  	faqs: state.content.faqs,
+		language: state.content.language,
+		faqSubcat: state.content.faqSubcategories  }
 }
 
 export default connect(mapStateToProps, { fetchFaqs })(FaqsSelectedSubcategory)

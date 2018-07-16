@@ -43,7 +43,7 @@ import Topic from './components/pages/topics/topic';
 import TopicParty from './components/pages/topics/topic-party';
 import TopicStage from './components/pages/topics/topic-stage';
 // import FamilyHome from './components/pages/topics/family/family-home';
-import Adoption from './components/pages/topics/family/family-adoption';
+//import Adoption from './components/pages/topics/family/family-adoption';
 
 import TodoApp from './components/pages/todo/components/App';
 // import ChecklistApp from './components/pages/checklist/checklistApp';
@@ -146,9 +146,11 @@ class AppRouter extends Component {
                   <Route exact path="/small-claims/:party/:stage" component={SmallClaimsStage} />
                   <Route path="/small-claims/:party/:stage/sub/:subcat" component={SmallClaimsSubStage} />
                  
+                  <Route path="/family-law" component={UnderConstruction} />
+
                   <Route exact path="/:topic" component={Topic} />
                   <Route exact path="/:topic/:party" component={TopicParty} />
-                  <Route exact path="/:topic/:party/:stage" component={UnderConstruction} />
+                  <Route exact path="/:topic/:party/:stage" component={TopicStage} />
 
                   <Route path="/family-law" component={UnderConstruction} />
                                     

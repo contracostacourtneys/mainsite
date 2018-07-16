@@ -11,42 +11,68 @@ import { fetchContentByParty, fetchStages } from '../../../actions/content.js';
 import { DEFAULT_LANG } from '../../../actions/types';
 import { bindActionCreators } from 'redux';
 
-const partyIds = [
+const categories = [
   {
-    name: 'defendant',
-    id: 'mI8A9AawXACAmYEmSyU0g' 
+    category: 'guardianship',
+    id: '25rk8cpWJeA666YKwumQyu'
   },
   {
-    name: 'plaintiff',
-    id: '2zYmskK1EUW22uukow4CaU'
-   }
-] 
+    category: 'family-law',
+    id: '4O0eqo7xHOaMMA8WyYW80C'
+  },
+  {
+    category: 'eviction',
+    id: '6qxRrat4HKc8UUk4yCGuSg'
+  },
+  {
+    category: 'dv',
+    id: '2rfORKm0KQe4K0uuEuoQci'
+  },
+  {
+    category: 'traffic/stage',
+    id: '2Syl95Uko8IwQqUgi2wSem'
+  },
+]
 
-// const stageIds = [
-//   {
-//     name: 'before',
-//     id: '1cMyrIaZ680ukwwSi8YscC'
-//   },
-//   {
-//     name: 'during',
-//     id: '5iDqJ92Rzqksq88gYWawE4'
-//   },
-//   {
-//     name: 'after',
-//     id: '4HkTlYlsFqqIgscmGWOCkk'
-//   }
-// ]
+const categoryIds = {
+  'guardianship': '25rk8cpWJeA666YKwumQyu',
+  'family-law': '4O0eqo7xHOaMMA8WyYW80C',
+  'eviction': '6qxRrat4HKc8UUk4yCGuSg',
+  'dv': '2rfORKm0KQe4K0uuEuoQci',
+  'traffic': '2Syl95Uko8IwQqUgi2wSem'
+}
+
+const partyIds = {
+  'defendant': 'mI8A9AawXACAmYEmSyU0g',
+  'plaintiff': '2zYmskK1EUW22uukow4CaU',
+  'other-occupant': 'zRzI8ug932cSgAU2KkIsS',
+  'parent': '5mVZkVVv7GQCCEgAyAiaay',
+  'tenant': '14F7MuQjQCkUiy8gIO48Mc',
+  'landlord': '5ZDpEk6mPeECMCe0oGEe2K',
+  'child': '2qX3uG3lq0iaekEMsqMQcs', 
+  'potential-guardian': '66Lp25CQJaQq2yUUcMacIu',
+  'guardianship': '25rk8cpWJeA666YKwumQyu',
+  'person-accused-of-abuse': '6hzNHOCpUWO8AuUISAyUo2', 
+  'person-seeking-protection': '6yqV1xQ4fuQWs0U2SY6smW',
+  'other-protected-person': '6zmut3k6ruyIucIwGaoge4',
+  'party': '5PSEN0jq12KU6C0oIyCaq6'
+}
 
 const stageIds = {
-   'before': '64dgqWF7dmuqYwCaKqEOUG',
-   'during': '1OHmeVRZ9Cu8EWmQUUQQyW',
-   'after': '5FKid7O1s4oKKAcoAqaSA4'
+   'before-your-case': '5KMyDPAZq0ui4oGUUo2cCe',//'4HkTlYlsFqqIgscmGWOCkk',
+   'during-your-case': '1OHmeVRZ9Cu8EWmQUUQQyW',
+   'after-your-case': '5FKid7O1s4oKKAcoAqaSA4',//'5FKid7O1s4oKKAcoAqaSA4' 
+   //'information': '24PsFOM7Buy6eYScEkAm8w'
   };
 
 class TopicStage extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      selectedParty: '',  
+    }
     this.renderMenuLinks = this.renderMenuLinks.bind(this)
+    this.renderTitle = this.renderTitle.bind(this)
   }
   componentWillMount() {
     // before component mounts, load content by selected party 
@@ -60,25 +86,29 @@ class TopicStage extends Component {
     // should I save a topic ID in the last page? but need to be able to 
     // get data if they just start on this page... 
     // check if params.party matches the partyId[x].name
-
-    // if (this.props.match.params.party === partyIds[0].name) {
+    // for (let i=0; i < partyIds.length; i++) {
+    //   if (this.props.match.params.party === partyIds[i].name) {
     //     // whichever name matches, return the id to _partyId
-    //       _partyId = partyIds[0].id
-    //   } else {
-    //      _partyId = partyIds[1].id
-    //   }
-    
+    //       _partyId = partyIds[i].id
+    //     } else {
+    //       _partyId = partyIds[1].id
+    //     }
+    // }
+
+    console.log('~~~~~~~~~~~', categoryIds[currentTopic])
+    console.log('partyIds[currentParty', partyIds[currentParty])
+    console.log('this.props.stages', this.props.stages)
 
     //fetch stages if not already present in store
     if (this.props.stages.length === 0){
       this.props.fetchStages();
     }
     // check for content then fetch and load content on first landing or when changing party
-    if (this.props.content.parties.length === 0 ){
-    	this.props.fetchParties()
+    if (this.props.content.stages.length === 0 ){
+    	this.props.fetchStages()
     }
     if (this.props.stageContent.length === 0 || this.state.selectedParty !== this.props.match.params.party ){
-      this.props.fetchContentByParty('SmallClaims', _partyId);
+      this.props.fetchContentByParty(categoryIds[currentTopic], partyIds[currentParty]);
       this.setState({...this.state, selectedParty: this.props.match.params.party});
     }
 
@@ -89,18 +119,19 @@ class TopicStage extends Component {
     .map((stage) => {
       return stage.url !== this.props.match.params.stage && (
         <div className="Stage-menu-item" key={stage.id}>
-          <Link to={stage.url}>{stage.titles[lang]}</Link>
+          <Link to={stage.url}>{stage.title[lang]}</Link>
         </div>
       )
     })
   }
-
-  // toSentenceCase(str) {
-  //   return str.split('-').map(function(word) {
-  //     return (word.charAt(0).toUpperCase() + word.slice(1));
-  //   }).join(' ');
-  // }
   
+  renderTitle() {
+    const title = this.props.match.params.stage;
+    return title.split('-').map(function(word) {
+      return (word.charAt(0).toUpperCase() + word.slice(1));
+    }).join(' ');
+  }
+
   render() {
     //const currentTitle = this.props.stages.find(stage => stage.url === this.props.match.params.stage).title[this.props.language]
     //const currentSlug = this.props.match.params.stage
@@ -125,7 +156,7 @@ class TopicStage extends Component {
           </div>
         </div>*/}
       {/* place holder, need to work out how to display the title w/out relying on redux store */}
-        <TitleLine title={this.props.stages.find(stage => stage.url === this.props.match.params.stage).title[this.props.language]} />
+        <TitleLine title={this.renderTitle()} />
         <AccordionBoxContainer stageUrl={this.props.match.params.stage} stageContent={ 
           this.props.stageContent.filter(tab => { return tab.stageId === stageIds[this.props.match.params.stage] })
             .sort((a, b) => a.id - b.id )} />
