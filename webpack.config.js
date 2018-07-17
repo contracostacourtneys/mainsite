@@ -124,7 +124,9 @@ const config = (env) => {
                   API_BASE_URL: JSON.stringify(process.env.API_BASE_URL),
                   API_SPACE_ID: JSON.stringify(process.env.API_SPACE_ID),
                   API_TOKEN: JSON.stringify(process.env.API_TOKEN),
-                  SMALL_CLAIMS_ID: JSON.stringify(process.env.SMALL_CLAIMS_ID) 
+                  SMALL_CLAIMS_ID: JSON.stringify(process.env.SMALL_CLAIMS_ID),
+                  TEST_CONTENT_PREVIEW_TOKEN: JSON.stringify(process.env.TEST_CONTENT_PREVIEW_TOKEN), 
+                  TEST_SPACE_ID: JSON.stringify(process.env.TEST_SPACE_ID)
                 } 
             }), 
             new webpack.optimize.OccurrenceOrderPlugin(),
