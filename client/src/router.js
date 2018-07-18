@@ -39,6 +39,7 @@ import SmallClaims from './components/pages/topics/smallclaims/smallclaims';
 import SmallClaimsParty from './components/pages/topics/smallclaims/smallclaims-party';
 import SmallClaimsStage from './components/pages/topics/smallclaims/smallclaims-stage';
 import SmallClaimsSubStage from './components/pages/topics/smallclaims/smallclaims-subStage';
+import FamilyLawPage from './components/pages/family-law-page';
 import Topic from './components/pages/topics/topic';
 import TopicParty from './components/pages/topics/topic-party';
 import TopicStage from './components/pages/topics/topic-stage';
@@ -146,13 +147,17 @@ class AppRouter extends Component {
                   <Route exact path="/small-claims/:party/:stage" component={SmallClaimsStage} />
                   <Route path="/small-claims/:party/:stage/sub/:subcat" component={SmallClaimsSubStage} />
                  
-                  <Route path="/family-law" component={UnderConstruction} />
+                  <Route exact path="/family-law" component={FamilyLawPage} />
+                  <Route exact path="/family-law/:topic" component={Topic} />
+                  <Route exact path="/family-law/:topic/:party" component={TopicParty} />
+                  <Route exact path="/family-law/:topic/:party/:stage" component={TopicStage} />
 
+              {/*place-holder for other case types*/}
                   <Route exact path="/:topic" component={Topic} />
                   <Route exact path="/:topic/:party" component={TopicParty} />
                   <Route exact path="/:topic/:party/:stage" component={TopicStage} />
 
-                  <Route path="/family-law" component={UnderConstruction} />
+                  {/*<Route path="/family-law" component={UnderConstruction} />*/}
                                     
 
                   {/*<Route path="/guardianship" component={UnderConstruction} />

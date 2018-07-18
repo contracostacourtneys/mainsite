@@ -39,10 +39,17 @@ import { DEFAULT_LANG } from '../../../actions/types';
 const pageIds = {
 	"guardianship": "25rk8cpWJeA666YKwumQyu", 
 	"dv": "2rfORKm0KQe4K0uuEuoQci",
-	"family-law": "4O0eqo7xHOaMMA8WyYW80C",
+	// "family-law": "4O0eqo7xHOaMMA8WyYW80C",
 	"eviction": "6qxRrat4HKc8UUk4yCGuSg",
-	"traffic": "2Syl95Uko8IwQqUgi2wSem"
+	"traffic": "2Syl95Uko8IwQqUgi2wSem",
+  "divorce": '3e4Q77Bx9SA4e68kEqAqqm',
+  'parentage': '2gLuMFQiogM4yKMcysMAmO',
+  'spousal-support': 'cJ50XZ428SGUWSosGceQ2',
+  'child-support': '1nOttXluzOkgW6ccKCSAmm',
+  'child-custody': '7zUEVvEpskIGiqYiySWqeO',
+  'adoption': 'iFwZyXKaVa4Uk2qWkOSWu'
 }
+
 
 class Topic extends Component {
   constructor() {
@@ -54,7 +61,8 @@ class Topic extends Component {
   componentWillMount() {
   	console.log('topics page componentWillMount')
 // the next two consts need to be pulled from content
-    const url = this.props.match.url.split('/')[1]
+    const params = this.props.match.url.split('/');
+    const url = params.length == 2? params[1] : params[2];
     console.log("url on topic generic page: ", url)
     const pageTopicId = pageIds[url]
     console.log("pageTopicId: ", pageTopicId)

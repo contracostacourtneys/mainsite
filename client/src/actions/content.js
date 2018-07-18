@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_CATEGORIES } from './types'
+import { FETCH_CATEGORIES, FETCH_SUBCATEGORIES } from './types'
 import { FETCH_PAGE } from './types'
 import { FETCH_PARTIES } from './types'
 import { FETCH_FORM_LAYOUT } from './types'
@@ -36,7 +36,7 @@ const TEST_CONTENT_PREVIEW_TOKEN = process.env.TEST_CONTENT_PREVIEW_TOKEN;
 // =========================================================
 export function fetchContact() {
   return function(dispatch){
-    axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=contact&locale=*`)
+    axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/environments/master/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=contact&locale=*`)
     .then( (response) => { 
       dispatch({type: FETCH_PAGE, payload: response});
       })
@@ -46,7 +46,7 @@ export function fetchContact() {
 
 export function fetchCategories() {
   return function(dispatch){
-    axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=category&locale=*`)
+    axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/environments/master/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=category&locale=*`)
     .then( (response) => { 
       const categories = response.data.items.map((category) => ({
         categoryId: category.sys.id,
@@ -63,9 +63,28 @@ export function fetchCategories() {
   }
 }
 
+export function fetchSubCategories() {
+  return function(dispatch){
+    axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/environments/master/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=subcategory&locale=*`)
+    .then( (response) => { 
+      const subcategories = response.data.items.map((subcategory) => ({
+        subcategoryId: subcategory.sys.id,
+        slug: subcategory.fields.slug['en-US'],
+        id: subcategory.fields.id['en-US'],
+        titles: subcategory.fields.title,
+        imageId: subcategory.fields.image['en-US'].sys.id
+      }))
+    .sort((a, b) => a.id - b.id);
+      dispatch({type: FETCH_SUBCATEGORIES, payload:subcategories});
+
+      })
+    .catch((error) => console.log("err: ", error));
+  }
+}
+
 export function fetchParties(id) {
   return function(dispatch){
-    axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=party&fields.categories.sys.id=${id}&locale=*`)
+    axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/environments/master/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=party&fields.categories.sys.id=${id}&locale=*`)
     .then( (response) => { 
       console.log('~~fetchParties~~')
       //return an ordered parties object
@@ -86,7 +105,7 @@ export function fetchParties(id) {
 
 export function fetchFormLayout() {
   return function(dispatch){
-    axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=formLayout&locale=*`)
+    axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/environments/master/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=formLayout&locale=*`)
     .then( (response) => { 
       dispatch({type: FETCH_FORM_LAYOUT, payload: response});
     })
@@ -96,7 +115,7 @@ export function fetchFormLayout() {
 
 export function fetchForms(label) {
   return function(dispatch){
-    axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=formList&fields.categoryLabel=${label}&locale=*`)
+    axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/environments/master/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=formList&fields.categoryLabel=${label}&locale=*`)
     .then( (response) => { 
       dispatch({type: FETCH_FORMS, payload: response});
       })
@@ -106,7 +125,7 @@ export function fetchForms(label) {
 
 export function fetchFaqLayout() {
   return function(dispatch){
-    axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=faqLayout&locale=*`)
+    axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/environments/master/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=faqLayout&locale=*`)
     .then( (response) => { 
       dispatch({type: FETCH_FAQ_LAYOUT, payload: response});
       })
@@ -117,7 +136,7 @@ export function fetchFaqLayout() {
 export function fetchFaqs(label, subcat) {
   if (subcat == "general") {
     return function(dispatch){
-      axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=faq&fields.category.sys.id=${label}&locale=*`)
+      axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/environments/master/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=faq&fields.category.sys.id=${label}&locale=*`)
       .then( (response) => { 
         dispatch({type: FETCH_FAQS, payload: response});
         })
@@ -125,7 +144,7 @@ export function fetchFaqs(label, subcat) {
     }
   } else {
     return function(dispatch){
-      axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=faq&fields.category.sys.id=${label}&fields.subcategories.sys.id=${subcat}&locale=*`)
+      axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/environments/master/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=faq&fields.category.sys.id=${label}&fields.subcategories.sys.id=${subcat}&locale=*`)
       .then( (response) => { 
         dispatch({type: FETCH_FAQS, payload: response});
         })
@@ -136,7 +155,7 @@ export function fetchFaqs(label, subcat) {
 
 export function fetchFaqSubcategories(label) {
   return function(dispatch){
-    axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=faqSubcategory&fields.categoryLabel=${label}&order=fields.order&locale=*`)
+    axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/environments/master/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=faqSubcategory&fields.categoryLabel=${label}&order=fields.order&locale=*`)
     .then( (response) => { 
       dispatch({type: FETCH_FAQ_SUBCATEGORIES, payload: response});
       })
@@ -146,7 +165,7 @@ export function fetchFaqSubcategories(label) {
 
 export function fetchStages(id) {
   return function(dispatch){
-    axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=stage&fields.categories.sys.id=${id}&order=fields.order&locale=*`)
+    axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/environments/master/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=stage&fields.categories.sys.id=${id}&order=fields.order&locale=*`)
     .then((response) => {
        const stages = response.data.items.map((stage) => ({
           partyLabel: stage.fields.partyLabel, 
@@ -168,7 +187,7 @@ export function fetchStages(id) {
 }
 
 export function fetchVideos() {
-  const request = axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=video`)
+  const request = axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/environments/master/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=video`)
   return {
     type: FETCH_VIDEOS,
     payload: request
@@ -176,7 +195,7 @@ export function fetchVideos() {
 }
 
 export function fetchVideoLinks() {
-  const request = axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=videoLink`)
+  const request = axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/environments/master/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=videoLink`)
   return {
     type: FETCH_VIDEO_LINKS,
     payload: request
@@ -184,7 +203,7 @@ export function fetchVideoLinks() {
 }
 
 export function fetchVideoCategories() {
-  const request = axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=videoSubcategory`)
+  const request = axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/environments/master/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=videoSubcategory`)
   return {
     type: FETCH_VIDEO_CATEGORIES,
     payload: request
@@ -193,7 +212,7 @@ export function fetchVideoCategories() {
 
 export function fetchContentByParty(id, party) {
   return function(dispatch){
-    axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=stageContent&fields.categories.sys.id=${id}&fields.parties.sys.id=${party}&order=sys.createdAt&locale=*`)
+    axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/environments/master/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=stageContent&fields.categories.sys.id=${id}&fields.parties.sys.id=${party}&order=sys.createdAt&locale=*`)
     .then( (response) => { 
       console.log('fetch stageContent action', response)
       //retrieve essential data      
@@ -220,7 +239,7 @@ export function fetchContentByParty(id, party) {
 
 export function fetchSubContentById(id) {
   return function(dispatch) {
-    axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=stageContent&sys.id=${id}&locale=*`)
+    axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/environments/master/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=stageContent&sys.id=${id}&locale=*`)
     .then((response) => {
       const subContent = response.data.includes.Entry.filter(ent => ent.sys.contentType.sys.id === "stageContentSub").map(item => item.fields)
       dispatch({type: FETCH_SUBCONTENT, payload: subContent})
@@ -230,8 +249,10 @@ export function fetchSubContentById(id) {
 
 export function fetchResourceLinks(id) {
   return function(dispatch){
-    axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=resource&fields.categories.sys.id=${id}&locale=*`)
+    console.log("fetchResourceLinks");
+    axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/environments/master/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=resource&fields.categories.sys.id=${id}&locale=*`)
       .then((response) => {
+        console.log("resources: ", response.data.items);
         const resources = response.data.items.map(resource => ({
           slug: resource.fields.slug['en-US'], titles: resource.fields.title, resourceId: resource.sys.id
         }));
@@ -246,7 +267,7 @@ export function fetchResourceLinks(id) {
 
 export function fetchChecklist() {
   return function(dispatch){
-    axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=checklistItem&locale=*`)
+    axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/environments/master/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=checklistItem&locale=*`)
       .then((response) => {
         console.log('checklist fetch payload', response.data.items)
         dispatch({
@@ -260,7 +281,7 @@ export function fetchChecklist() {
 
 export function fetchContactPage() {
   return function(dispatch){
-    axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=contact&locale=*`)
+    axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/environments/master/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=contact&locale=*`)
       .then((response) => {
         dispatch({
           type: FETCH_CONTACT_LAYOUT,
@@ -273,7 +294,7 @@ export function fetchContactPage() {
 
 export function fetchMenuLinks() {
   return function(dispatch){
-    axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=menuLink&order=fields.order&locale=*`)
+    axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/environments/master/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=menuLink&order=fields.order&locale=*`)
       .then((response) => {
         dispatch({
           type: FETCH_MENU_LINKS,
@@ -286,7 +307,7 @@ export function fetchMenuLinks() {
 
 export function fetchFooter() {
   return function(dispatch){
-    axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=footer&locale=*`)
+    axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/environments/master/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=footer&locale=*`)
       .then((response) => {
         const footerSections = response.data.includes.Entry;
         dispatch({

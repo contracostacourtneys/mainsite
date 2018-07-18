@@ -1,5 +1,5 @@
 // import { FETCH_PAGE_DATA, ERROR_RESPONSE } from '../actions/types';
-import { FETCH_CATEGORIES } from '../actions/types';
+import { FETCH_CATEGORIES, FETCH_SUBCATEGORIES } from '../actions/types';
 import { FETCH_PARTIES } from '../actions/types';
 import { FETCH_FAQS } from '../actions/types';
 import { FETCH_FORMS } from '../actions/types';
@@ -26,6 +26,7 @@ const has = require('has-own-property-x');
 
 const INITIAL_STATE = { 
   categories: [],
+  subcategories: [],
   parties: [],
   contactTitle: [],
   contactSections: [],
@@ -55,6 +56,8 @@ export default function(state = INITIAL_STATE, action) {
   switch(action.type) {
   case FETCH_CATEGORIES:
     return { ...state, categories: action.payload };
+  case FETCH_SUBCATEGORIES:
+    return { ...state, subcategories: action.payload };
   case FETCH_PARTIES:
     return { ...state, parties: action.payload };
   case FETCH_FORM_LAYOUT:
