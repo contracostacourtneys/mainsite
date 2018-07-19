@@ -19,9 +19,15 @@ import { DEFAULT_LANG } from '../../../actions/types';
 const pageIds = {
   "guardianship": "25rk8cpWJeA666YKwumQyu", 
   "dv": "2rfORKm0KQe4K0uuEuoQci",
-  "family-law": "4O0eqo7xHOaMMA8WyYW80C",
+  // "family-law": "4O0eqo7xHOaMMA8WyYW80C",
   "eviction": "6qxRrat4HKc8UUk4yCGuSg",
-  "traffic": "2Syl95Uko8IwQqUgi2wSem"
+  "traffic": "2Syl95Uko8IwQqUgi2wSem",
+  "divorce": '3e4Q77Bx9SA4e68kEqAqqm',
+  'parentage': '2gLuMFQiogM4yKMcysMAmO',
+  'spousal-support': 'cJ50XZ428SGUWSosGceQ2',
+  'child-support': '1nOttXluzOkgW6ccKCSAmm',
+  'child-custody': '7zUEVvEpskIGiqYiySWqeO',
+  'adoption': 'iFwZyXKaVa4Uk2qWkOSWu'
 }
 
 class TopicParty extends Component {
@@ -31,7 +37,7 @@ class TopicParty extends Component {
   }
 
   componentWillMount() {
-    const url = this.props.match.url.split('/')[1]
+    const url = this.props.match.params.topic;
     console.log("url on topic generic page: ", url)
     const pageTopicId = pageIds[url]
     console.log("pageTopicId: ", pageTopicId)
@@ -50,14 +56,27 @@ class TopicParty extends Component {
 
 	render() {
     const lang = this.props.language;
-		const resources = this.props.resources.map((item) => {
-			return (
-				<div key={item.resourceId}>
-          {/*unavailable translations now default to 'en-US'*/}
-					<a href={item.url} target="_blank">{item.titles[lang] || item.titles['en-US']}</a>
-				</div>
-			)
-		})
+		// const resources = this.props.resources.map((item) => {
+		// 	return (
+		// 		<div key={item.resourceId}>
+  //         {unavailable translations now default to 'en-US'}
+		// 			<a href={item.url} target="_blank">{item.titles[lang] || item.titles['en-US']}</a>
+		// 		</div>
+		// 	)
+		// })
+    const params = this.props.match.url.split('/').slice(0, -1).join('/')
+
+    const resources = this.props.resources.map((item) => {
+      return (
+        <div key={item.resourceId}>
+          {/*resource link titles not translated, now default to 'en-US'*/}
+          {/*} <a href={item.url } target="_blank">{item.titles[lang] || item.titles['en-US']}</a>*/}
+          <Link to={`${params}/resources`}>
+            {item.titles[lang] || item.titles['en-US']}
+          </Link>
+        </div>
+      )
+    })
 
     const currentUnit = this.props.match.url.split('/')[1];
     const currentTitle = this.toSentenceCase(currentUnit)

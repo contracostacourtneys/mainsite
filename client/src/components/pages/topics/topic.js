@@ -54,15 +54,15 @@ const pageIds = {
 class Topic extends Component {
   constructor() {
     super();
-    this.onPartyClick = this.onPartyClick.bind(this)
+    // this.onPartyClick = this.onPartyClick.bind(this)
     this.toSentenceCase = this.toSentenceCase.bind(this)
   }
 
   componentWillMount() {
   	console.log('topics page componentWillMount')
 // the next two consts need to be pulled from content
-    const params = this.props.match.url.split('/');
-    const url = params.length == 2? params[1] : params[2];
+    // const params = this.props.match.url.split('/');
+    const url = this.props.match.params.topic;
     console.log("url on topic generic page: ", url)
     const pageTopicId = pageIds[url]
     console.log("pageTopicId: ", pageTopicId)
@@ -71,12 +71,12 @@ class Topic extends Component {
     this.props.fetchResourceLinks(pageTopicId)
   }
 
-  onPartyClick(_id, e){
-    this.props.storePartyId(_id)
-    console.log('onpartyclick, id', _id)
-    e.stopPropagation();
-    this.setState({partyId: _id})
-  }
+  // onPartyClick(_id, e){
+  //   this.props.storePartyId(_id)
+  //   console.log('onpartyclick, id', _id)
+  //   e.stopPropagation();
+  //   this.setState({partyId: _id})
+  // }
 
   toSentenceCase(str) {
     // create a readable title from the slug
@@ -88,6 +88,9 @@ class Topic extends Component {
 
   render() {
     const lang = this.props.language;
+    // const params = this.props.match.url.split('/');
+    const currentUnit = this.props.match.params.topic;
+    const currentTitle = this.toSentenceCase(currentUnit)
     // const faqs = temporaryFaqs.map((faq, index) => {
     //   return (
     //     <div key={index}>
@@ -102,17 +105,19 @@ class Topic extends Component {
       return (
         <div key={item.resourceId}>
           {/*resource link titles not translated, now default to 'en-US'*/}
-          <a href={item.url } target="_blank">{item.titles[lang] || item.titles['en-US']}</a>
+          {/*} <a href={item.url } target="_blank">{item.titles[lang] || item.titles['en-US']}</a>*/}
+          <Link to={`${this.props.match.url}/resources`}>
+            {item.titles[lang] || item.titles['en-US']}
+          </Link>
         </div>
       )
     })
 
-    const currentUnit = this.props.match.url.split('/')[1];
-    const currentTitle = this.toSentenceCase(currentUnit)
+    
     const renderedParties = this.props.parties.map((party) => {
         return (
           <div className="Square-box-container" key={party.id}>
-            <Link to={`/${currentUnit}/${party.url}`}>
+            <Link to={`${this.props.match.url}/${party.url}`}>
               <Squarebox 
                 id={party.partyId}
                 boxTitle={party.titles[lang]}  

@@ -167,6 +167,7 @@ export function fetchStages(id) {
   return function(dispatch){
     axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/environments/master/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=stage&fields.categories.sys.id=${id}&order=fields.order&locale=*`)
     .then((response) => {
+       console.log("stages: ", response.data.items)
        const stages = response.data.items.map((stage) => ({
           partyLabel: stage.fields.partyLabel, 
           parties: stage.fields.parties, 
@@ -254,7 +255,11 @@ export function fetchResourceLinks(id) {
       .then((response) => {
         console.log("resources: ", response.data.items);
         const resources = response.data.items.map(resource => ({
-          slug: resource.fields.slug['en-US'], titles: resource.fields.title, resourceId: resource.sys.id
+          // slug: resource.fields.slug['en-US'], 
+          titles: resource.fields.title, 
+          resourceId: resource.sys.id,
+          blockText: resource.fields.blockText, 
+          // id: resource.fields.id['en-US']
         }));
         dispatch({
           type: FETCH_RESOURCE_LINKS,

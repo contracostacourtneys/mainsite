@@ -55,6 +55,7 @@ class AccordionBoxContainer extends Component {
 		// return <div>test</div>
 
 	  let renderedContent = [];
+    console.log("this.props", this.props);
 
     // used to render videolinks
     if (this.props.type === 'links' && this.props.hasOwnProperty('itemField')) {
@@ -106,6 +107,36 @@ class AccordionBoxContainer extends Component {
             <hr className="Accordion-box-line" />
           </div>
         )
+      })
+    }
+    //used to render resource links
+    else if (this.props.resource){
+      const lang = this.props.language;
+      renderedContent = this.props.stageContent
+      .map((tab) => {
+        return (
+            <div className='Accordion-box-item' key={tab.resourceId}>
+                <div>
+                  <h3 onClick={() => this.toggleClass(tab.resourceId)} className={this.state.activeId == tab.resourceId && this.state.pressed == true ? "blue-font Accordion-box-grey": " "} >
+                  {tab.titles[lang]}
+                    <span className="Accordion-box-icon">
+                      {this.state.activeId == tab.resourceId && this.state.pressed == true ? "-" : "+"}
+                    </span>
+                  </h3>
+
+                  <div className={this.state.activeId == tab.resourceId && this.state.pressed == true ? " ": "hidden"}> 
+                    <div className="Accordion-box-content">
+                      <ReactMarkdown source={tab.blockText && tab.blockText[lang]} />
+                    </div>    
+                  </div>
+                </div>
+              
+            
+              <hr className="Accordion-box-line" />
+
+            </div> 
+          );
+
       })
     }
     // used to render non-videoLink stageContent

@@ -43,6 +43,7 @@ import FamilyLawPage from './components/pages/family-law-page';
 import Topic from './components/pages/topics/topic';
 import TopicParty from './components/pages/topics/topic-party';
 import TopicStage from './components/pages/topics/topic-stage';
+import ResourcePage from './components/pages/resource-page';
 // import FamilyHome from './components/pages/topics/family/family-home';
 //import Adoption from './components/pages/topics/family/family-adoption';
 
@@ -149,13 +150,16 @@ class AppRouter extends Component {
                  
                   <Route exact path="/family-law" component={FamilyLawPage} />
                   <Route exact path="/family-law/:topic" component={Topic} />
+                  <Route exact path="/family-law/:topic/resources" component={ResourcePage} />
                   <Route exact path="/family-law/:topic/:party" component={TopicParty} />
                   <Route exact path="/family-law/:topic/:party/:stage" component={TopicStage} />
 
               {/*place-holder for other case types*/}
                   <Route exact path="/:topic" component={Topic} />
+                   <Route exact path="/:topic/resources" component={ResourcePage} />
                   <Route exact path="/:topic/:party" component={TopicParty} />
                   <Route exact path="/:topic/:party/:stage" component={TopicStage} />
+
 
                   {/*<Route path="/family-law" component={UnderConstruction} />*/}
                                     
