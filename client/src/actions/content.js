@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_CATEGORIES, FETCH_SUBCATEGORIES } from './types'
+import { FETCH_CATEGORIES, FETCH_SUBCATEGORIES, FETCH_FORM_SUBCATEGORIES } from './types'
 import { FETCH_PAGE } from './types'
 import { FETCH_PARTIES } from './types'
 import { FETCH_FORM_LAYOUT } from './types'
@@ -106,8 +106,10 @@ export function fetchParties(id) {
 
 export function fetchFormLayout() {
   return function(dispatch){
+    console.log("fetch form layout");
     axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/environments/master/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=formLayout&locale=*`)
     .then( (response) => { 
+      console.log("form categories: ", response.data.items);
       dispatch({type: FETCH_FORM_LAYOUT, payload: response});
     })
     .catch((error) => console.log('err: ', error));
@@ -124,10 +126,23 @@ export function fetchForms(label) {
   }
 }
 
+export function fetchFormSubcategories(label) {
+  return function(dispatch){
+    console.log("fetch form subcategories")
+    axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/environments/master/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=formSubcategory&fields.categoryLabel=${label}&order=fields.order&locale=*`)
+    .then( (response) => { 
+      dispatch({type: FETCH_FORM_SUBCATEGORIES, payload: response});
+      })
+    .catch((error) => console.log('err: ', error));
+  }
+}
+
 export function fetchFaqLayout() {
   return function(dispatch){
+    console.log('fetch faq layout');
     axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/environments/master/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=faqLayout&locale=*`)
     .then( (response) => { 
+      console.log("faq categories: ", response.data.items);
       dispatch({type: FETCH_FAQ_LAYOUT, payload: response});
       })
     .catch((error) => console.log('err: ', error));
@@ -156,6 +171,7 @@ export function fetchFaqs(label, subcat) {
 
 export function fetchFaqSubcategories(label) {
   return function(dispatch){
+    console.log("fetch faq subcategories")
     axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/environments/master/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=faqSubcategory&fields.categoryLabel=${label}&order=fields.order&locale=*`)
     .then( (response) => { 
       dispatch({type: FETCH_FAQ_SUBCATEGORIES, payload: response});

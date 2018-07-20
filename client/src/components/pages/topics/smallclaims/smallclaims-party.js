@@ -16,10 +16,15 @@ import SquareBox from '../../../template/square-box';
 import Bot from '../../../chatbot/Bot.jsx'; 
 import { DEFAULT_LANG } from '../../../../actions/types';
 
+const partyIds = {
+  'plaintiff': '2zYmskK1EUW22uukow4CaU',
+  'defendant': 'mI8A9AawXACAmYEmSyU0g'
+};
+
 class SmallClaimsParty extends Component {
   componentWillMount() {
     const smallClaimsId = "5iJkGCIR2gUoMKaeQOqo6W"
-    this.props.fetchStages(smallClaimsId);
+    this.props.fetchStages(smallClaimsId, partyIds[this.props.match.params.party]);
     this.props.fetchResourceLinks(smallClaimsId);
     this.props.fetchChecklist();
   }

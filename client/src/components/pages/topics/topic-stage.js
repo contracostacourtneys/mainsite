@@ -35,11 +35,18 @@ const categories = [
 ]
 
 const categoryIds = {
-  'guardianship': '25rk8cpWJeA666YKwumQyu',
-  'family-law': '4O0eqo7xHOaMMA8WyYW80C',
-  'eviction': '6qxRrat4HKc8UUk4yCGuSg',
-  'dv': '2rfORKm0KQe4K0uuEuoQci',
-  'traffic': '2Syl95Uko8IwQqUgi2wSem'
+
+  "guardianship": "25rk8cpWJeA666YKwumQyu", 
+  "dv": "2rfORKm0KQe4K0uuEuoQci",
+  // "family-law": "4O0eqo7xHOaMMA8WyYW80C",
+  "eviction": "6qxRrat4HKc8UUk4yCGuSg",
+  "traffic": "2Syl95Uko8IwQqUgi2wSem",
+  "divorce": '3e4Q77Bx9SA4e68kEqAqqm',
+  'parentage': '2gLuMFQiogM4yKMcysMAmO',
+  'spousal-support': 'cJ50XZ428SGUWSosGceQ2',
+  'child-support': '1nOttXluzOkgW6ccKCSAmm',
+  'child-custody': '7zUEVvEpskIGiqYiySWqeO',
+  'adoption': 'iFwZyXKaVa4Uk2qWkOSWu'
 }
 
 const partyIds = {
@@ -55,7 +62,11 @@ const partyIds = {
   'person-accused-of-abuse': '6hzNHOCpUWO8AuUISAyUo2', 
   'person-seeking-protection': '6yqV1xQ4fuQWs0U2SY6smW',
   'other-protected-person': '6zmut3k6ruyIucIwGaoge4',
-  'party': '5PSEN0jq12KU6C0oIyCaq6'
+  'party': '5PSEN0jq12KU6C0oIyCaq6',
+  'adoptive-parent': '7kYjskasww8suQCSEQkwkq',
+  'respondent': '5EZjTNSV2gi8WAGeouuEAc',
+  'petitioner': '84dTTeyxHOAUgc2uAWgQy',
+  'birth-parent': '4XArK00RJSuIwGWUcEaWQ2'  
 }
 
 const stageIds = {
