@@ -154,6 +154,8 @@ class AppRouter extends Component {
                   <Route exact path="/family-law/:topic/:party" component={TopicParty} />
                   <Route exact path="/family-law/:topic/:party/:stage" component={TopicStage} />
 
+                  {/*<Route exact path="/traffic" component={TopicStage} />*/}
+
               {/*place-holder for other case types*/}
                   <Route exact path="/:topic" component={Topic} />
                    <Route exact path="/:topic/resources" component={ResourcePage} />

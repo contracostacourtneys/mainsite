@@ -94,9 +94,10 @@ export function fetchParties(id) {
         url: party.fields.slug['en-US'],
         titles: party.fields.title,
         imageId: party.fields.image['en-US'].sys.id,
-        category: party.fields.categories['en-US']
+        category: party.fields.categories['en-US'],
+        order: party.fields.order['en-US']
       }))
-      .sort((a, b) => a.id - b.id);
+      .sort((a, b) => a.order - b.order);
       dispatch({type: FETCH_PARTIES, payload: parties});
       })
     .catch((error) => console.log("err: ", error));
@@ -163,17 +164,18 @@ export function fetchFaqSubcategories(label) {
   }
 }
 
-export function fetchStages(id) {
+export function fetchStages(categoryId, partyId) {
   return function(dispatch){
-    axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/environments/master/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=stage&fields.categories.sys.id=${id}&order=fields.order&locale=*`)
+    axios.get(`${API_BASE_URL}/spaces/${TEST_SPACE_ID}/environments/master/entries?access_token=${TEST_CONTENT_PREVIEW_TOKEN}&content_type=stage&fields.categories.sys.id=${categoryId}&fields.parties.sys.id=${partyId}&order=fields.order&locale=*`)
     .then((response) => {
-       console.log("stages: ", response.data.items)
+       console.log("stages: ", response.data.items);
        const stages = response.data.items.map((stage) => ({
           partyLabel: stage.fields.partyLabel, 
           parties: stage.fields.parties, 
           title: stage.fields.title, 
           imageId: stage.fields.image['en-US'].sys.id, 
-          id: stage.fields.order['en-US'], 
+          id: stage.fields.id['en-US'], 
+          order: stage.fields.order['en-US'],
           slug: stage.fields.slug['en-US']}))
         .sort((a, b) => a.order - b.order);
        console.log("returned ordered stages: ", stages);

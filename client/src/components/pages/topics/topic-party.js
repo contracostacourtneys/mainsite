@@ -30,6 +30,26 @@ const pageIds = {
   'adoption': 'iFwZyXKaVa4Uk2qWkOSWu'
 }
 
+const partyIds = {
+  'defendant': 'mI8A9AawXACAmYEmSyU0g',
+  'plaintiff': '2zYmskK1EUW22uukow4CaU',
+  'other-occupant': 'zRzI8ug932cSgAU2KkIsS',
+  'parent': '5mVZkVVv7GQCCEgAyAiaay',
+  'tenant': '14F7MuQjQCkUiy8gIO48Mc',
+  'landlord': '5ZDpEk6mPeECMCe0oGEe2K',
+  'child': '2qX3uG3lq0iaekEMsqMQcs', 
+  'potential-guardian': '66Lp25CQJaQq2yUUcMacIu',
+  'guardianship': '25rk8cpWJeA666YKwumQyu',
+  'person-accused-of-abuse': '6hzNHOCpUWO8AuUISAyUo2', 
+  'person-seeking-protection': '6yqV1xQ4fuQWs0U2SY6smW',
+  'other-protected-person': '6zmut3k6ruyIucIwGaoge4',
+  'party': '5PSEN0jq12KU6C0oIyCaq6',
+  'adoptive-parent': '7kYjskasww8suQCSEQkwkq',
+  'respondent': '5EZjTNSV2gi8WAGeouuEAc',
+  'petitioner': '84dTTeyxHOAUgc2uAWgQy',
+  'birth-parent': '4XArK00RJSuIwGWUcEaWQ2'  
+}
+
 class TopicParty extends Component {
   constructor() {
     super();
@@ -40,9 +60,12 @@ class TopicParty extends Component {
     const url = this.props.match.params.topic;
     console.log("url on topic generic page: ", url)
     const pageTopicId = pageIds[url]
-    console.log("pageTopicId: ", pageTopicId)
+    console.log("pageTopicId: ", pageTopicId);
 
-    this.props.fetchStages(pageTopicId);
+    const partyId = partyIds[this.props.match.params.party];
+    console.log("partyId: ", partyId);
+
+    this.props.fetchStages(pageTopicId, partyId);
     this.props.fetchResourceLinks(pageTopicId);
 
   }
@@ -82,10 +105,10 @@ class TopicParty extends Component {
     const currentTitle = this.toSentenceCase(currentUnit)
     // console.log('this.props.stages', this.props.stages)
     const renderedStages = this.props.stages.map((stage) => {
-      const currentParty = this.props.match.params.party;
+      // const currentParty = this.props.match.params.party;
       //console.log(currentParty, stage, '====currentParty')
       return (
-        <div  className={stage.partyLabel['en-US']  === 'all' || stage.partyLabel['en-US'] === currentParty ? "Square-box-container " : "Square-box-container hidden"} key={stage.id}>
+        <div  className="Square-box-container" key={stage.id}>
          <Link to={`${this.props.match.url}/${stage.slug}`}>
            <SquareBox
              id={stage.id}
