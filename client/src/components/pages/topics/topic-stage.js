@@ -71,7 +71,7 @@ const partyIds = {
 
 const stageIds = {
   'about-traffic-tickets': '3G7yOiNWLuW8EIMKyK0608',
-  'taking=-care-of-your-ticket': '6l2Q6n8JBmycuEGyOIOyC2',
+  'taking-care-of-your-ticket': '6l2Q6n8JBmycuEGyOIOyC2',
   'traffic-ticket-trials': '26cgNnFJy4SisGcI8uKaCq',
   'before-your-case': '5KMyDPAZq0ui4oGUUo2cCe',//'4HkTlYlsFqqIgscmGWOCkk',
    'during-your-case': '1OHmeVRZ9Cu8EWmQUUQQyW',
