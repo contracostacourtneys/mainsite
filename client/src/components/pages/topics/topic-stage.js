@@ -70,6 +70,7 @@ const partyIds = {
 }
 
 const stageIds = {
+  'summary-dissolution':  '2ChmspyJ4MQcIGOy8CEOgg',
   'about-traffic-tickets': '3G7yOiNWLuW8EIMKyK0608',
   'taking-care-of-your-ticket': '6l2Q6n8JBmycuEGyOIOyC2',
   'traffic-ticket-trials': '26cgNnFJy4SisGcI8uKaCq',
