@@ -6,21 +6,21 @@ const checklistTemplatePlaintiff =
 	[
 		{
 	   "title": "Read SC-100-INFO",
-	   "blockText": "<p>The information sheet for SC-100 has helpful general information about small claims court. It explains important rules and processes you should know. You should read it before you file a claim.</p>",
+	   "blockText": "<p>The information sheet for SC-100 has helpful general information about small claims court. It explains important rules and processes you should know. Read it before you file a claim.</p>",
 	   "completed": false,
 	   "stage": 0,
 	   "id": 1
 		},
 		{
 		 "title": "Ask for Payment",
-		 "blockText": "<p>Before you can sue, you must ask the other person to pay you. You can ask in person, by phone, or by writing a letter or email. If there is a very good reason you did not ask before suing, you may still be able to sue, but you’ll have to explain why you never asked to the court.</p>",
+		 "blockText": "<p>Before you can sue, you must ask the other person to pay you. You can ask in person, by phone, or by writing a letter or email. If there is a very good reason you did not ask before suing, you may still be able to sue, but you’ll have to explain why you never asked.</p>",
 		 "completed": false,
 		 "stage": 0,
 		 "id": 2
 		},
 		{
 		 "title": "Write a Letter Asking for Payment",
-		 "blockText": "<p>You can ask the other person to pay in person or over the phone, but sometimes it helps to ask in writing. By writing a letter or email, you can take the time to clearly explain to the other person why he or she owes you the money and why that amount is owed. If you need help to write a letter, the State has a <a href=\"http://www.courts.ca.gov/11145.htm\" target=\"_blank\" >computer program</a> that can help you write the letter.</p>",
+		 "blockText": "<p>You can ask the other person to pay in person or over the phone, but sometimes it helps to ask in writing. By writing a letter or email, you can take the time to explain to the other person why he or she owes you the money and why that amount is owed. If you need help to write a letter, the State has a <a href=\"http://www.courts.ca.gov/11145.htm\" target=\"_blank\" >computer program</a> that can help you write the letter.</p>",
 		 "completed": false,
 		 "stage": 0,
 		 "id": 3
@@ -33,15 +33,15 @@ const checklistTemplatePlaintiff =
 		 "id": 4
 		},
 		{
-		 "title": "Decide Where to File Your Claim",
-		 "blockText": "<p>In order to sue in small claims, you have to first know where you can file your claim. Every County has a small claims court. There are rules about which one you can sue in. To learn more about where you can file you claim, read <a href=\" http://www.cc-courthelp.org/?Lang=ENG&Parent=222\" target=\"_blank\"> Find the Right Court to File Your Claim</a>. You can also talk to a small claims advisor.</p>",
+		 "title": "Learn Where to File Your Claim",
+		 "blockText": "<p>Every County has a small claims court. There are rules about which one you can sue in. To learn more about where you can file you claim, read <a href=\" http://www.cc-courthelp.org/?Lang=ENG&Parent=222\" target=\"_blank\"> Find the Right Court to File Your Claim</a>. You can also talk to a small claims advisor.</p>",
 		 "completed": false,
 		 "stage": 0,
 		 "id": 5
 		},
 		{
 		 "title": "Find Out How to Name the Defendant",
-		 "blockText": "<p>In order to file a small claims case, you will need to name the Defendant the proper way. This can sometimes be tricky for s business or corporation. To learn more read <a href=\"http://www.cc-courthelp.org/default.aspx?Lang=ENG&Parent=268\" target=\"_blank\">How Do I Name the Defendant in My Court Papers?</a>.</p>",
+		 "blockText": "<p>In order to file a small claims case, you will need to name the Defendant the proper way.  Sometimes, this can be tricky for a business or corporation. To learn more read <a href=\"http://www.cc-courthelp.org/default.aspx?Lang=ENG&Parent=268\" target=\"_blank\">How Do I Name the Defendant in My Court Papers?</a>.</p>",
 		 "completed": false,
 		 "stage": 0,
 		 "id": 6
@@ -62,7 +62,7 @@ const checklistTemplatePlaintiff =
 		},
 		{
 		 "title": "Fee Waivers",
-		 "blockText": "<p>There is a filing fee to start a small claims case. If you are low-income you may qualify for a fee waiver. To find out if you qualify, read a <a href=\"http://www.courts.ca.gov/documents/fw001info.pdf\" target=\"_blank\">Fee Waiver Information Sheet</a>. If you do qualify, you’ll need to fill out <a href=\"http://www.courts.ca.gov/documents/fw001.pdf\" target=\"_blank\">FW-001.</a></p>",
+		 "blockText": "<p>There is a filing fee to start a case. If you are low-income you may qualify for a fee waiver. To find out if you qualify, read a <a href=\"http://www.courts.ca.gov/documents/fw001info.pdf\" target=\"_blank\">Fee Waiver Information Sheet</a>. If you do qualify, you’ll need to fill out <a href=\"http://www.courts.ca.gov/documents/fw001.pdf\" target=\"_blank\">FW-001.</a></p>",
 		 "completed": false,
 		 "stage": 0,
 		 "id": 9
