@@ -12,6 +12,7 @@ const pageIds = {
 	// "family-law": "4O0eqo7xHOaMMA8WyYW80C",
 	"eviction": "6qxRrat4HKc8UUk4yCGuSg",
 	"traffic": "2Syl95Uko8IwQqUgi2wSem",
+	"small-claims": "5iJkGCIR2gUoMKaeQOqo6W",
   "divorce": '3e4Q77Bx9SA4e68kEqAqqm',
   'parentage': '2gLuMFQiogM4yKMcysMAmO',
   'spousal-support': 'cJ50XZ428SGUWSosGceQ2',
