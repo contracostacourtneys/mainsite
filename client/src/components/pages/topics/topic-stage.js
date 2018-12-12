@@ -77,7 +77,7 @@ const stageIds = {
   'before-your-case': '5KMyDPAZq0ui4oGUUo2cCe',//'4HkTlYlsFqqIgscmGWOCkk',
    'during-your-case': '1OHmeVRZ9Cu8EWmQUUQQyW',
    'after-your-case': '5FKid7O1s4oKKAcoAqaSA4',//'5FKid7O1s4oKKAcoAqaSA4' 
-   //'information': '24PsFOM7Buy6eYScEkAm8w'
+   'information': '24PsFOM7Buy6eYScEkAm8w'
   };
 
 class TopicStage extends Component {
